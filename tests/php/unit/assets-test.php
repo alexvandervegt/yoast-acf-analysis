@@ -58,14 +58,14 @@ class Assets_Test extends TestCase {
 			->once()
 			->with( AC_SEO_ACF_ANALYSIS_PLUGIN_FILE )
 			->andReturn(
-				array(
+				[
 					'Version' => '2.0.0',
-				)
+				]
 			);
 
 		$testee = new \Yoast_ACF_Analysis_Assets();
 		$testee->init();
 
-		$this->assertTrue( has_filter( 'admin_enqueue_scripts', array( $testee, 'enqueue_scripts' ) ) );
+		$this->assertTrue( has_filter( 'admin_enqueue_scripts', [ $testee, 'enqueue_scripts' ] ) );
 	}
 }
