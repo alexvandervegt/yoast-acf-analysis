@@ -6,6 +6,8 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * Class Registry_Test.
+ *
+ * @covers Yoast_ACF_Analysis_Registry
  */
 class Registry_Test extends TestCase {
 

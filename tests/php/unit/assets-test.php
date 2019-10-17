@@ -8,6 +8,8 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * Class Assets_Test.
+ *
+ * @covers Yoast_ACF_Analysis_Assets
  */
 class Assets_Test extends TestCase {
 

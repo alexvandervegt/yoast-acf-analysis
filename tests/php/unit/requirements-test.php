@@ -35,6 +35,8 @@ class Requirements_Test extends TestCase {
 	/**
 	 * Tests the situation where there are no dependencies.
 	 *
+	 * @covers Yoast_ACF_Analysis_Requirements::are_met
+	 *
 	 * @return void
 	 */
 	public function testNoDependencies() {
@@ -44,6 +46,9 @@ class Requirements_Test extends TestCase {
 
 	/**
 	 * Tests that requirements are met when a valid dependency is added.
+	 *
+	 * @covers Yoast_ACF_Analysis_Requirements::add_dependency
+	 * @covers Yoast_ACF_Analysis_Requirements::are_met
 	 *
 	 * @return void
 	 */
@@ -57,6 +62,9 @@ class Requirements_Test extends TestCase {
 	/**
 	 * Tests that requirements are not met when an invalid dependency is added.
 	 *
+	 * @covers Yoast_ACF_Analysis_Requirements::add_dependency
+	 * @covers Yoast_ACF_Analysis_Requirements::are_met
+	 *
 	 * @return void
 	 */
 	public function testFailingDependency() {
@@ -68,6 +76,9 @@ class Requirements_Test extends TestCase {
 
 	/**
 	 * Tests that requirements are not met when a mix of valid and invalid dependencies are added.
+	 *
+	 * @covers Yoast_ACF_Analysis_Requirements::add_dependency
+	 * @covers Yoast_ACF_Analysis_Requirements::are_met
 	 *
 	 * @return void
 	 */

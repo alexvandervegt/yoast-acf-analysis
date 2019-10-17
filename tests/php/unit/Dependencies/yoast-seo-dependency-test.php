@@ -7,6 +7,8 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * Class Yoast_SEO_Dependency_Test.
+ *
+ * @covers Yoast_ACF_Analysis_Dependency_Yoast_SEO
  */
 class Yoast_SEO_Dependency_Test extends TestCase {
 

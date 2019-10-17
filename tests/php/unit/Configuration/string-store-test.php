@@ -6,6 +6,8 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * Class String_Store_Test.
+ *
+ * @covers Yoast_ACF_Analysis_String_Store
  */
 class String_Store_Test extends TestCase {
 

@@ -9,6 +9,8 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * Class Configuration_Test.
+ *
+ * @covers Yoast_ACF_Analysis_Configuration
  */
 class Configuration_Test extends TestCase {
 

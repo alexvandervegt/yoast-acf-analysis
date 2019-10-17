@@ -33,6 +33,8 @@ class Main_Test extends TestCase {
 	/**
 	 * Tests invalid configurations.
 	 *
+	 * @covers Yoast_ACF_Analysis_Configuration
+	 *
 	 * @return void
 	 */
 	public function testInvalidConfig() {
