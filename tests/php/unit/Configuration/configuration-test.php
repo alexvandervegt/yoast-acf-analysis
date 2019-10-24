@@ -255,7 +255,7 @@ class Configuration_Test extends TestCase {
 	 * @return void
 	 */
 	public function testScraperConfigFilter() {
-		$config    = array();
+		$config    = [];
 		$blacklist = new \Yoast_ACF_Analysis_String_Store();
 
 		$configuration = new \Yoast_ACF_Analysis_Configuration(
@@ -266,7 +266,7 @@ class Configuration_Test extends TestCase {
 
 		Filters\expectApplied( \Yoast_ACF_Analysis_Facade::get_filter_name( 'scraper_config' ) )
 			->once()
-			->with( array() )
+			->with( [] )
 			->andReturn( $config );
 
 		$this->assertSame( $config, $configuration->get_scraper_config() );
@@ -288,10 +288,10 @@ class Configuration_Test extends TestCase {
 
 		Filters\expectApplied( \Yoast_ACF_Analysis_Facade::get_filter_name( 'scraper_config' ) )
 			->once()
-			->with( array() )
+			->with( [] )
 			->andReturn( '' );
 
-		$this->assertSame( array(), $configuration->get_scraper_config() );
+		$this->assertSame( [], $configuration->get_scraper_config() );
 	}
 
 	/**

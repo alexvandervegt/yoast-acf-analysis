@@ -90,7 +90,7 @@ class Yoast_SEO_Dependency_Test extends TestCase {
 		$testee = new \Yoast_ACF_Analysis_Dependency_Yoast_SEO();
 		$testee->register_notifications();
 
-		$this->assertTrue( has_action( 'admin_notices', array( $testee, 'message_plugin_not_activated' ) ) );
+		$this->assertTrue( has_action( 'admin_notices', [ $testee, 'message_plugin_not_activated' ] ) );
 	}
 
 	/**
@@ -104,6 +104,6 @@ class Yoast_SEO_Dependency_Test extends TestCase {
 		$testee = new \Yoast_ACF_Analysis_Dependency_Yoast_SEO();
 		$testee->register_notifications();
 
-		$this->assertTrue( has_action( 'admin_notices', array( $testee, 'message_minimum_version' ) ) );
+		$this->assertTrue( has_action( 'admin_notices', [ $testee, 'message_minimum_version' ] ) );
 	}
 }
