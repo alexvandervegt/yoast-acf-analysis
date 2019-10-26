@@ -74,7 +74,7 @@ class Yoast_ACF_Analysis_Configuration {
 		}
 
 		// Fall back on filter use.
-		// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- ACF hook.
+		// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals -- ACF hook.
 		return apply_filters( 'acf/get_info', 'version' );
 	}
 
