@@ -1,6 +1,6 @@
 <?php
 
-namespace Yoast\AcfAnalysis\Tests\Dependencies;
+namespace Yoast\WP\ACF\Tests\Dependencies;
 
 use Brain\Monkey;
 use PHPUnit\Framework\TestCase;

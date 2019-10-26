@@ -1,6 +1,6 @@
 <?php
 
-namespace Yoast\AcfAnalysis\Tests\Assets;
+namespace Yoast\WP\ACF\Tests;
 
 use Brain\Monkey;
 use Brain\Monkey\Functions;

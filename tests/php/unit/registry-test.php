@@ -1,6 +1,6 @@
 <?php
 
-namespace Yoast\AcfAnalysis\Tests\Configuration;
+namespace Yoast\WP\ACF\Tests;
 
 use PHPUnit\Framework\TestCase;
 
