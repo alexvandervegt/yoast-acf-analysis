@@ -88,16 +88,31 @@ class Yoast_ACF_Analysis_Configuration {
 		/**
 		 * Filters the fields to ignore based on field type.
 		 *
+		 * @since      2.0.0
+		 * @deprecated 2.4.0. Use the {@see 'Yoast\WP\ACF\blacklist_type'} filter instead.
+		 *
+		 * @param Yoast_ACF_Analysis_String_Store $blacklist_type Store instance of ignored field types
+		 */
+		$blacklist_type = apply_filters_deprecated(
+			'yoast-acf-analysis/blacklist_type',
+			array( $this->blacklist_type ),
+			'YoastSEO ACF 2.4.0',
+			'Yoast\WP\ACF\blacklist_type'
+		);
+
+		/**
+		 * Filters the fields to ignore based on field type.
+		 *
 		 * You can add or remove field types to be analysed.
 		 * Be aware that when adding types this will only have an effect if there is a scraper for the type.
 		 *
-		 * @since 2.0.0
+		 * @since 2.4.0
 		 *
 		 * @param Yoast_ACF_Analysis_String_Store $blacklist_type Store instance of ignored field types
 		 */
 		$blacklist_type = apply_filters(
-			'yoast-acf-analysis/blacklist_type',
-			$this->blacklist_type
+			'Yoast\WP\ACF\blacklist_type',
+			$blacklist_type
 		);
 
 		if ( $blacklist_type instanceof Yoast_ACF_Analysis_String_Store ) {
@@ -228,7 +243,7 @@ class Yoast_ACF_Analysis_Configuration {
 		 *
 		 * This is an advanced filter that should rarely if ever be used, especially because it only affects ACF4.
 		 * If you want to exclude certain fields by type or name there are the more specific filters
-		 * {@see 'yoast-acf-analysis/blacklist_type'} and {@see 'yoast-acf-analysis/blacklist_name'} for these.
+		 * {@see 'Yoast\WP\ACF\blacklist_type'} and {@see 'yoast-acf-analysis/blacklist_name'} for these.
 		 *
 		 * @see get_blacklist_type()
 		 * @see get_blacklist_name()

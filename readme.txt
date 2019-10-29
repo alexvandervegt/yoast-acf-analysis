@@ -33,7 +33,7 @@ Previously called Yoast ACF Analysis.
 });`
 
 = Remove field type from scoring =
-`add_filter( 'yoast-acf-analysis/blacklist_type', function ( $blacklist_type ) {
+`add_filter( 'Yoast\WP\ACF\blacklist_type', function ( $blacklist_type ) {
     // text, image etc
     $blacklist_type->add( 'text' );
     $blacklist_type->add( 'image' );

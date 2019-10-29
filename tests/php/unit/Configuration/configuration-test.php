@@ -101,7 +101,7 @@ class Configuration_Test extends TestCase {
 
 		$blacklist_type2 = new \Yoast_ACF_Analysis_String_Store();
 
-		Filters\expectApplied( 'yoast-acf-analysis/blacklist_type' )
+		Filters\expectApplied( 'Yoast\WP\ACF\blacklist_type' )
 			->once()
 			->with( $blacklist_type )
 			->andReturn( $blacklist_type2 );
@@ -124,7 +124,7 @@ class Configuration_Test extends TestCase {
 			new \Yoast_ACF_Analysis_String_Store()
 		);
 
-		Filters\expectApplied( 'yoast-acf-analysis/blacklist_type' )
+		Filters\expectApplied( 'Yoast\WP\ACF\blacklist_type' )
 			->once()
 			->with( $store )
 			->andReturn( '' );
