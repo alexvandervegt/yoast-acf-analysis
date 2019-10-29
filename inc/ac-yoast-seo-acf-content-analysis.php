@@ -71,11 +71,32 @@ class AC_Yoast_SEO_ACF_Content_Analysis {
 		 *
 		 * @see Yoast_ACF_Analysis_Configuration
 		 *
-		 * @since 2.0.0
+		 * @since      2.0.0
+		 * @deprecated 2.4.0. Use the {@see 'Yoast\WP\ACF\config'} filter instead.
 		 *
 		 * @param Yoast_ACF_Analysis_Configuration $configuration Plugin configuration instance
 		 */
-		$custom_configuration = apply_filters( 'yoast-acf-analysis/config', $configuration );
+		$custom_configuration = apply_filters_deprecated(
+			'yoast-acf-analysis/config',
+			array( $configuration ),
+			'YoastSEO ACF 2.4.0',
+			'Yoast\WP\ACF\config'
+		);
+
+		/**
+		 * Filters the plugin configuration instance.
+		 *
+		 * You can replace the whole plugin configuration with a custom instance.
+		 * Only use this as a last resort as there are multiple more specific filters in the default configuration.
+		 *
+		 * @see Yoast_ACF_Analysis_Configuration
+		 *
+		 * @since 2.4.0
+		 *
+		 * @param Yoast_ACF_Analysis_Configuration $configuration Plugin configuration instance
+		 */
+		$custom_configuration = apply_filters( 'Yoast\WP\ACF\config', $custom_configuration );
+
 		if ( $custom_configuration instanceof Yoast_ACF_Analysis_Configuration ) {
 			$configuration = $custom_configuration;
 		}
