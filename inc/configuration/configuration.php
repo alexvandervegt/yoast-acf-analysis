@@ -247,15 +247,30 @@ class Yoast_ACF_Analysis_Configuration {
 		/**
 		 * Refresh rate for changes to ACF fields
 		 *
+		 * @since      2.0.0
+		 * @deprecated 2.4.0 Use the {@see 'Yoast\WP\ACF\refresh_rate'} filter instead.
+		 *
+		 * @param int $refresh_rate Refresh rates in milliseconds
+		 */
+		$refresh_rate = apply_filters_deprecated(
+			'yoast-acf-analysis/refresh_rate',
+			array( $this->refresh_rate ),
+			'YoastSEO ACF 2.4.0',
+			'Yoast\WP\ACF\refresh_rate'
+		);
+
+		/**
+		 * Refresh rate for changes to ACF fields
+		 *
 		 * This plugin limits the rate at which changes to ACF fields are reported to Yoast SEO.
 		 * By default it will only report changes to Yoast SEO after no changes have happened for 1000 milliseconds.
 		 * This filter allows to change this to any value above 200 milliseconds.
 		 *
-		 * @since 2.0.0
+		 * @since 2.4.0
 		 *
 		 * @param int $refresh_rate Refresh rates in milliseconds
 		 */
-		$refresh_rate = apply_filters( 'yoast-acf-analysis/refresh_rate', $this->refresh_rate );
+		$refresh_rate = apply_filters( 'Yoast\WP\ACF\refresh_rate', $refresh_rate );
 		$refresh_rate = intval( $refresh_rate, 10 );
 
 		// Make sure the refresh rate is not too low, this will introduce problems in the browser of the user.

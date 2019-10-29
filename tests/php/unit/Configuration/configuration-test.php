@@ -300,7 +300,7 @@ class Configuration_Test extends TestCase {
 	 * @return void
 	 */
 	public function testRefreshRateFilter() {
-		Filters\expectApplied( 'yoast-acf-analysis/refresh_rate' )
+		Filters\expectApplied( 'Yoast\WP\ACF\refresh_rate' )
 			->once()
 			->with( 1000 )
 			->andReturn( 9999 );
@@ -320,7 +320,7 @@ class Configuration_Test extends TestCase {
 	 * @return void
 	 */
 	public function testRefreshRateMinimumValueFilter() {
-		Filters\expectApplied( 'yoast-acf-analysis/refresh_rate' )
+		Filters\expectApplied( 'Yoast\WP\ACF\refresh_rate' )
 			->once()
 			->with( 1000 )
 			->andReturn( 1 );

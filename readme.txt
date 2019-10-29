@@ -48,7 +48,7 @@ Previously called Yoast ACF Analysis.
 });`
 
 = Change refresh rate =
-`add_filter( 'yoast-acf-analysis/refresh_rate', function () {
+`add_filter( 'Yoast\WP\ACF\refresh_rate', function () {
     // Refresh rates in milliseconds
     return 1000;
 });`
