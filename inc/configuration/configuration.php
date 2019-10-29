@@ -333,6 +333,24 @@ class Yoast_ACF_Analysis_Configuration {
 		/**
 		 * Filters the order of the ACF fields relative to the post_content.
 		 *
+		 * @since      2.2.0
+		 * @deprecated 2.4.0 Use the {@see 'Yoast\WP\ACF\field_order'} filter instead.
+		 *
+		 * @param array $order_config {
+		 *      @type string $field_name     Name of the ACF field
+		 *      @type int    $order          Integer
+		 * }
+		 */
+		$field_order = apply_filters_deprecated(
+			'yoast-acf-analysis/field_order',
+			array( array() ),
+			'YoastSEO ACF 2.4.0',
+			'Yoast\WP\ACF\field_order'
+		);
+
+		/**
+		 * Filters the order of the ACF fields relative to the post_content.
+		 *
 		 * The array has the ACF field key as the array key and the value should be an integer
 		 * where negative values result in the field value being placed before the default post_content.
 		 *
@@ -342,14 +360,14 @@ class Yoast_ACF_Analysis_Configuration {
 		 *          'field_591eb45f2be86' => -1
 		 *     );
 		 *
-		 * @since 2.2.0
+		 * @since 2.4.0
 		 *
 		 * @param array $order_config {
 		 *      @type string $field_name     Name of the ACF field
 		 *      @type int    $order          Integer
 		 * }
 		 */
-		return apply_filters( 'yoast-acf-analysis/field_order', array() );
+		return apply_filters( 'Yoast\WP\ACF\field_order', $field_order );
 	}
 
 	/**
