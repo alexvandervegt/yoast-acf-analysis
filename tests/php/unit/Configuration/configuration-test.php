@@ -264,7 +264,7 @@ class Configuration_Test extends TestCase {
 			new \Yoast_ACF_Analysis_String_Store()
 		);
 
-		Filters\expectApplied( 'yoast-acf-analysis/scraper_config' )
+		Filters\expectApplied( 'Yoast\WP\ACF\scraper_config' )
 			->once()
 			->with( [] )
 			->andReturn( $config );
@@ -286,7 +286,7 @@ class Configuration_Test extends TestCase {
 			new \Yoast_ACF_Analysis_String_Store()
 		);
 
-		Filters\expectApplied( 'yoast-acf-analysis/scraper_config' )
+		Filters\expectApplied( 'Yoast\WP\ACF\scraper_config' )
 			->once()
 			->with( [] )
 			->andReturn( '' );

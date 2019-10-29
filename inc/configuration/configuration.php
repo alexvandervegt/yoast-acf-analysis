@@ -204,16 +204,31 @@ class Yoast_ACF_Analysis_Configuration {
 		/**
 		 * Filters the scraper configuration.
 		 *
+		 * @since      2.0.0
+		 * @deprecated 2.4.0 Use the {@see 'Yoast\WP\ACF\scraper_config'} filter instead.
+		 *
+		 * @param array $scraper_config Nested array of scraper configuration
+		 */
+		$scraper_config = apply_filters_deprecated(
+			'yoast-acf-analysis/scraper_config',
+			array( $this->scraper_config ),
+			'YoastSEO ACF 2.4.0',
+			'Yoast\WP\ACF\scraper_config'
+		);
+
+		/**
+		 * Filters the scraper configuration.
+		 *
 		 * This nested array holds configuration specific to certain scrapers (for specific field types)
 		 * Before using this filter see if there isn't a more specific one like {@see 'Yoast\WP\ACF\headlines'}.
 		 *
-		 * @since 2.0.0
+		 * @since 2.4.0
 		 *
 		 * @param array $scraper_config Nested array of scraper configuration
 		 */
 		$scraper_config = apply_filters(
-			'yoast-acf-analysis/scraper_config',
-			$this->scraper_config
+			'Yoast\WP\ACF\scraper_config',
+			$scraper_config
 		);
 
 		if ( is_array( $scraper_config ) ) {

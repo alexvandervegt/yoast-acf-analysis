@@ -111,7 +111,7 @@ class AC_Yoast_SEO_ACF_Content_Analysis {
 	 */
 	protected function register_config_filters() {
 		add_filter(
-			'yoast-acf-analysis/scraper_config',
+			'Yoast\WP\ACF\scraper_config',
 			array( $this, 'filter_scraper_config' )
 		);
 	}
