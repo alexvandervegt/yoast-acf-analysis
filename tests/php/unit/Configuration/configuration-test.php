@@ -349,7 +349,7 @@ class Configuration_Test extends TestCase {
 			$field_selector
 		);
 
-		Filters\expectApplied( 'yoast-acf-analysis/field_selectors' )
+		Filters\expectApplied( 'Yoast\WP\ACF\field_selectors' )
 			->once()
 			->with( $field_selector )
 			->andReturn( $custom_store );
@@ -372,7 +372,7 @@ class Configuration_Test extends TestCase {
 			$store
 		);
 
-		Filters\expectApplied( 'yoast-acf-analysis/field_selectors' )
+		Filters\expectApplied( 'Yoast\WP\ACF\field_selectors' )
 			->once()
 			->with( $store )
 			->andReturn( '' );

@@ -286,6 +286,21 @@ class Yoast_ACF_Analysis_Configuration {
 		/**
 		 * Filters the CSS selectors that are used to find the fields when using ACF4.
 		 *
+		 * @since      2.0.0
+		 * @deprecated 2.4.0 Use the {@see 'Yoast\WP\ACF\field_selectors'} filter instead.
+		 *
+		 * @param Yoast_ACF_Analysis_String_Store $field_selectors Field selector store instance
+		 */
+		$field_selectors = apply_filters_deprecated(
+			'yoast-acf-analysis/field_selectors',
+			array( $this->field_selectors ),
+			'YoastSEO ACF 2.4.0',
+			'Yoast\WP\ACF\field_selectors'
+		);
+
+		/**
+		 * Filters the CSS selectors that are used to find the fields when using ACF4.
+		 *
 		 * This is an advanced filter that should rarely if ever be used, especially because it only affects ACF4.
 		 * If you want to exclude certain fields by type or name there are the more specific filters
 		 * {@see 'Yoast\WP\ACF\blacklist_type'} and {@see 'Yoast\WP\ACF\blacklist_name'} for these.
@@ -293,13 +308,13 @@ class Yoast_ACF_Analysis_Configuration {
 		 * @see get_blacklist_type()
 		 * @see get_blacklist_name()
 		 *
-		 * @since 2.0.0
+		 * @since 2.4.0
 		 *
 		 * @param Yoast_ACF_Analysis_String_Store $field_selectors Field selector store instance
 		 */
 		$field_selectors = apply_filters(
-			'yoast-acf-analysis/field_selectors',
-			$this->field_selectors
+			'Yoast\WP\ACF\field_selectors',
+			$field_selectors
 		);
 
 		if ( $field_selectors instanceof Yoast_ACF_Analysis_String_Store ) {
