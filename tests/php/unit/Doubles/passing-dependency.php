@@ -1,6 +1,6 @@
 <?php
 
-namespace Yoast\AcfAnalysis\Tests\Doubles;
+namespace Yoast\WP\ACF\Tests\Doubles;
 
 /**
  * Class Passing_Dependency.

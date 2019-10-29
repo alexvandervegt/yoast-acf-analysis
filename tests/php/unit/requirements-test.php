@@ -1,13 +1,13 @@
 <?php
 
-namespace Yoast\AcfAnalysis\Tests\Configuration;
+namespace Yoast\WP\ACF\Tests;
 
 use Brain\Monkey;
 use Brain\Monkey\Functions;
 use Brain\Monkey\Filters;
 use PHPUnit\Framework\TestCase;
-use Yoast\AcfAnalysis\Tests\Doubles\Passing_Dependency;
-use Yoast\AcfAnalysis\Tests\Doubles\Failing_Dependency;
+use Yoast\WP\ACF\Tests\Doubles\Passing_Dependency;
+use Yoast\WP\ACF\Tests\Doubles\Failing_Dependency;
 
 /**
  * Class Requirements_Test.
