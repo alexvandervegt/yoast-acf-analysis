@@ -124,27 +124,47 @@ class AC_Yoast_SEO_ACF_Content_Analysis {
 	 * @return array The enhanched scraper config.
 	 */
 	public function filter_scraper_config( $scraper_config ) {
+		/**
+		 * Filters which ACF text fields are to be treated as a headline by the text scraper.
+		 *
+		 * @since      2.0.0
+		 * @deprecated 2.4.0. Use the {@see 'Yoast\WP\ACF\headlines'} filter instead.
+		 *
+		 * @param array $headlines_config {
+		 *      @type string $field_name     Name of the ACF field
+		 *      @type int    $headline_level Headline level 1 to 6
+		 * }
+		 */
+		$headline = apply_filters_deprecated(
+			'yoast-acf-analysis/headlines',
+			array( array() ),
+			'YoastSEO ACF 2.4.0',
+			'Yoast\WP\ACF\headlines'
+		);
+
+		/**
+		 * Filters which ACF text fields are to be treated as a headline by the text scraper.
+		 *
+		 * The array has the ACF field key as the array key and the value should be an integer from 1 to 6
+		 * that corresponds to the 6 possible HTML tags <h1> to <h6>.
+		 *
+		 * So this is how to make the field with the key "field_591eb45f2be86" a <h3>:
+		 *
+		 *     $headlines_config = array(
+		 *          'field_591eb45f2be86' => 3
+		 *     );
+		 *
+		 * @since 2.4.0
+		 *
+		 * @param array $headlines_config {
+		 *      @type string $field_name     Name of the ACF field
+		 *      @type int    $headline_level Headline level 1 to 6
+		 * }
+		 */
+		$headline = apply_filters( 'Yoast\WP\ACF\headlines', $headline );
+
 		$scraper_config['text'] = array(
-			/**
-			 * Filters which ACF text fields are to be treated as a headline by the text scraper.
-			 *
-			 * The array has the ACF field key as the array key and the value should be an integer from 1 to 6
-			 * that corresponds to the 6 possible HTML tags <h1> to <h6>.
-			 *
-			 * So this is how to make the field with the key "field_591eb45f2be86" a <h3>:
-			 *
-			 *     $headlines_config = array(
-			 *          'field_591eb45f2be86' => 3
-			 *     );
-			 *
-			 * @since 2.0.0
-			 *
-			 * @param array $headlines_config {
-			 *      @type string $field_name     Name of the ACF field
-			 *      @type int    $headline_level Headline level 1 to 6
-			 * }
-			 */
-			'headlines' => apply_filters( 'yoast-acf-analysis/headlines', array() ),
+			'headlines' => $headline,
 		);
 
 		return $scraper_config;

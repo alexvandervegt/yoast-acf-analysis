@@ -41,7 +41,7 @@ Previously called Yoast ACF Analysis.
 });`
 
 = Define custom field a specific heading value =
-`add_filter( 'yoast-acf-analysis/headlines', function ( $headlines ) {
+`add_filter( 'Yoast\WP\ACF\headlines', function ( $headlines ) {
     // value from 1-6, 1=h1, 6=h6
     $headlines['field_591eb45f2be86'] = 3;
     return $headlines;

@@ -175,7 +175,7 @@ class Yoast_ACF_Analysis_Configuration {
 		 * Filters the scraper configuration.
 		 *
 		 * This nested array holds configuration specific to certain scrapers (for specific field types)
-		 * Before using this filter see if there isn't a more specific one like {@see yoast-acf-analysis/headlines}.
+		 * Before using this filter see if there isn't a more specific one like {@see 'Yoast\WP\ACF\headlines'}.
 		 *
 		 * @since 2.0.0
 		 *
