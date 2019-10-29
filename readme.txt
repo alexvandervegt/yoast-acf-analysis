@@ -27,7 +27,7 @@ Previously called Yoast ACF Analysis.
 == Filters ==
 
 = Remove specific field from scoring =
-`add_filter( 'yoast-acf-analysis/blacklist_name', function ( $blacklist_name ) {
+`add_filter( 'Yoast\WP\ACF\blacklist_name', function ( $blacklist_name ) {
     $blacklist_name->add( 'my-field-name' );
     return $blacklist_name;
 });`

@@ -145,7 +145,6 @@
 			<property name="prefixes" type="array" extend="true">
 				<element value="AC_Yoast"/>
 				<element value="AC_SEO"/>
-				<element value="ysacf"/>
 			</property>
 		</properties>
 	</rule>

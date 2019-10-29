@@ -149,7 +149,7 @@ class Configuration_Test extends TestCase {
 
 		$blacklist_name2 = new \Yoast_ACF_Analysis_String_Store();
 
-		Filters\expectApplied( 'yoast-acf-analysis/blacklist_name' )
+		Filters\expectApplied( 'Yoast\WP\ACF\blacklist_name' )
 			->once()
 			->with( $blacklist_name )
 			->andReturn( $blacklist_name2 );
@@ -241,7 +241,7 @@ class Configuration_Test extends TestCase {
 			new \Yoast_ACF_Analysis_String_Store()
 		);
 
-		Filters\expectApplied( 'yoast-acf-analysis/blacklist_name' )
+		Filters\expectApplied( 'Yoast\WP\ACF\blacklist_name' )
 			->once()
 			->with( $store )
 			->andReturn( '' );
