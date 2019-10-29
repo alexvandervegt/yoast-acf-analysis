@@ -37,6 +37,9 @@ class Yoast_ACF_Analysis_Facade {
 	/**
 	 * Wraps the notification with an unique identifier.
 	 *
+	 * @deprecated 2.4.0 Use hard-coded filter names instead.
+	 * @codeCoverageIgnore
+	 *
 	 * @param string $filter_name Filter to wrap.
 	 *
 	 * @return string Full filter name to use.

@@ -96,7 +96,7 @@ class Yoast_ACF_Analysis_Configuration {
 		 * @param Yoast_ACF_Analysis_String_Store $blacklist_type Store instance of ignored field types
 		 */
 		$blacklist_type = apply_filters(
-			Yoast_ACF_Analysis_Facade::get_filter_name( 'blacklist_type' ),
+			'yoast-acf-analysis/blacklist_type',
 			$this->blacklist_type
 		);
 
@@ -145,7 +145,7 @@ class Yoast_ACF_Analysis_Configuration {
 		 * @param Yoast_ACF_Analysis_String_Store $blacklist_name Store instance of ignored field names
 		 */
 		$blacklist_name = apply_filters(
-			Yoast_ACF_Analysis_Facade::get_filter_name( 'blacklist_name' ),
+			'yoast-acf-analysis/blacklist_name',
 			$this->blacklist_name
 		);
 
@@ -182,7 +182,7 @@ class Yoast_ACF_Analysis_Configuration {
 		 * @param array $scraper_config Nested array of scraper configuration
 		 */
 		$scraper_config = apply_filters(
-			Yoast_ACF_Analysis_Facade::get_filter_name( 'scraper_config' ),
+			'yoast-acf-analysis/scraper_config',
 			$this->scraper_config
 		);
 
@@ -210,7 +210,7 @@ class Yoast_ACF_Analysis_Configuration {
 		 *
 		 * @param int $refresh_rate Refresh rates in milliseconds
 		 */
-		$refresh_rate = apply_filters( Yoast_ACF_Analysis_Facade::get_filter_name( 'refresh_rate' ), $this->refresh_rate );
+		$refresh_rate = apply_filters( 'yoast-acf-analysis/refresh_rate', $this->refresh_rate );
 		$refresh_rate = intval( $refresh_rate, 10 );
 
 		// Make sure the refresh rate is not too low, this will introduce problems in the browser of the user.
@@ -238,7 +238,7 @@ class Yoast_ACF_Analysis_Configuration {
 		 * @param Yoast_ACF_Analysis_String_Store $field_selectors Field selector store instance
 		 */
 		$field_selectors = apply_filters(
-			Yoast_ACF_Analysis_Facade::get_filter_name( 'field_selectors' ),
+			'yoast-acf-analysis/field_selectors',
 			$this->field_selectors
 		);
 
@@ -274,7 +274,7 @@ class Yoast_ACF_Analysis_Configuration {
 		 *      @type int    $order          Integer
 		 * }
 		 */
-		return apply_filters( Yoast_ACF_Analysis_Facade::get_filter_name( 'field_order' ), array() );
+		return apply_filters( 'yoast-acf-analysis/field_order', array() );
 	}
 
 	/**

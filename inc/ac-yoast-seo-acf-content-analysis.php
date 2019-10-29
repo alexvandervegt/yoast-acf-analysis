@@ -75,7 +75,7 @@ class AC_Yoast_SEO_ACF_Content_Analysis {
 		 *
 		 * @param Yoast_ACF_Analysis_Configuration $configuration Plugin configuration instance
 		 */
-		$custom_configuration = apply_filters( Yoast_ACF_Analysis_Facade::get_filter_name( 'config' ), $configuration );
+		$custom_configuration = apply_filters( 'yoast-acf-analysis/config', $configuration );
 		if ( $custom_configuration instanceof Yoast_ACF_Analysis_Configuration ) {
 			$configuration = $custom_configuration;
 		}
@@ -90,7 +90,7 @@ class AC_Yoast_SEO_ACF_Content_Analysis {
 	 */
 	protected function register_config_filters() {
 		add_filter(
-			Yoast_ACF_Analysis_Facade::get_filter_name( 'scraper_config' ),
+			'yoast-acf-analysis/scraper_config',
 			array( $this, 'filter_scraper_config' )
 		);
 	}
@@ -123,7 +123,7 @@ class AC_Yoast_SEO_ACF_Content_Analysis {
 			 *      @type int    $headline_level Headline level 1 to 6
 			 * }
 			 */
-			'headlines' => apply_filters( Yoast_ACF_Analysis_Facade::get_filter_name( 'headlines' ), array() ),
+			'headlines' => apply_filters( 'yoast-acf-analysis/headlines', array() ),
 		);
 
 		return $scraper_config;
