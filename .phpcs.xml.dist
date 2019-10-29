@@ -103,23 +103,6 @@
 
 	<!--
 	#############################################################################
-	TEMPORARY TWEAK
-	YoastCS will demand short arrays, but until support for WP < 5.2 has been
-	dropped, this can - for now - only be allowed (and enforced) for the folders
-	containing PHP 5.6+ code.
-	#############################################################################
-	-->
-
-	<rule ref="Generic.Arrays.DisallowShortArraySyntax">
-		<exclude-pattern>/tests/*</exclude-pattern>
-	</rule>
-	<rule ref="Generic.Arrays.DisallowLongArraySyntax">
-		<include-pattern>/tests/*</include-pattern>
-	</rule>
-
-
-	<!--
-	#############################################################################
 	SELECTIVE EXCLUSIONS
 	Exclude specific files for specific sniffs and/or exclude sub-groups in sniffs.
 	#############################################################################

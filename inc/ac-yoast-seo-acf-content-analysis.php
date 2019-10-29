@@ -18,7 +18,7 @@ class AC_Yoast_SEO_ACF_Content_Analysis {
 	 * @return void
 	 */
 	public function init() {
-		add_action( 'admin_init', array( $this, 'admin_init' ) );
+		add_action( 'admin_init', [ $this, 'admin_init' ] );
 	}
 
 	/**
@@ -78,7 +78,7 @@ class AC_Yoast_SEO_ACF_Content_Analysis {
 		 */
 		$custom_configuration = apply_filters_deprecated(
 			'yoast-acf-analysis/config',
-			array( $configuration ),
+			[ $configuration ],
 			'YoastSEO ACF 2.4.0',
 			'Yoast\WP\ACF\config'
 		);
@@ -112,7 +112,7 @@ class AC_Yoast_SEO_ACF_Content_Analysis {
 	protected function register_config_filters() {
 		add_filter(
 			'Yoast\WP\ACF\scraper_config',
-			array( $this, 'filter_scraper_config' )
+			[ $this, 'filter_scraper_config' ]
 		);
 	}
 
@@ -137,7 +137,7 @@ class AC_Yoast_SEO_ACF_Content_Analysis {
 		 */
 		$headline = apply_filters_deprecated(
 			'yoast-acf-analysis/headlines',
-			array( array() ),
+			[ [] ],
 			'YoastSEO ACF 2.4.0',
 			'Yoast\WP\ACF\headlines'
 		);
@@ -163,9 +163,9 @@ class AC_Yoast_SEO_ACF_Content_Analysis {
 		 */
 		$headline = apply_filters( 'Yoast\WP\ACF\headlines', $headline );
 
-		$scraper_config['text'] = array(
+		$scraper_config['text'] = [
 			'headlines' => $headline,
-		);
+		];
 
 		return $scraper_config;
 	}
@@ -178,7 +178,7 @@ class AC_Yoast_SEO_ACF_Content_Analysis {
 	protected function get_field_selectors() {
 		$field_selectors = new Yoast_ACF_Analysis_String_Store();
 
-		$default_field_selectors = array(
+		$default_field_selectors = [
 			// Text.
 			'input[type=text][id^=acf]',
 
@@ -199,7 +199,7 @@ class AC_Yoast_SEO_ACF_Content_Analysis {
 
 			// Taxonomy.
 			'.acf-taxonomy-field',
-		);
+		];
 
 		foreach ( $default_field_selectors as $field_selector ) {
 			$field_selectors->add( $field_selector );
@@ -217,7 +217,7 @@ class AC_Yoast_SEO_ACF_Content_Analysis {
 
 		$blacklist = new Yoast_ACF_Analysis_String_Store();
 
-		$default_blacklist = array(
+		$default_blacklist = [
 			'number',
 			'password',
 
@@ -241,7 +241,7 @@ class AC_Yoast_SEO_ACF_Content_Analysis {
 			'repeater',
 			'flexible_content',
 			'group',
-		);
+		];
 
 		foreach ( $default_blacklist as $type ) {
 			$blacklist->add( $type );

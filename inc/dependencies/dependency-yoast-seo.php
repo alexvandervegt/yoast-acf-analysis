@@ -34,12 +34,12 @@ final class Yoast_ACF_Analysis_Dependency_Yoast_SEO implements Yoast_ACF_Analysi
 	 */
 	public function register_notifications() {
 		if ( ! defined( 'WPSEO_VERSION' ) ) {
-			add_action( 'admin_notices', array( $this, 'message_plugin_not_activated' ) );
+			add_action( 'admin_notices', [ $this, 'message_plugin_not_activated' ] );
 			return;
 		}
 
 		if ( ! $this->has_required_version() ) {
-			add_action( 'admin_notices', array( $this, 'message_minimum_version' ) );
+			add_action( 'admin_notices', [ $this, 'message_minimum_version' ] );
 		}
 	}
 

@@ -43,7 +43,7 @@ class Yoast_ACF_Analysis_Configuration {
 	 *
 	 * @var array
 	 */
-	protected $scraper_config = array();
+	protected $scraper_config = [];
 
 	/**
 	 * Yoast_ACF_Analysis_Configuration constructor.
@@ -95,7 +95,7 @@ class Yoast_ACF_Analysis_Configuration {
 		 */
 		$blacklist_type = apply_filters_deprecated(
 			'yoast-acf-analysis/blacklist_type',
-			array( $this->blacklist_type ),
+			[ $this->blacklist_type ],
 			'YoastSEO ACF 2.4.0',
 			'Yoast\WP\ACF\blacklist_type'
 		);
@@ -139,7 +139,7 @@ class Yoast_ACF_Analysis_Configuration {
 		 */
 		$legacy_names = apply_filters_deprecated(
 			'ysacf_exclude_fields',
-			array( array() ),
+			[ [] ],
 			'YoastSEO ACF 2.0.0',
 			'Yoast\WP\ACF\blacklist_name'
 		);
@@ -160,7 +160,7 @@ class Yoast_ACF_Analysis_Configuration {
 		 */
 		$blacklist_name = apply_filters_deprecated(
 			'yoast-acf-analysis/blacklist_name',
-			array( $this->blacklist_name ),
+			[ $this->blacklist_name ],
 			'YoastSEO ACF 2.4.0',
 			'Yoast\WP\ACF\blacklist_name'
 		);
@@ -211,7 +211,7 @@ class Yoast_ACF_Analysis_Configuration {
 		 */
 		$scraper_config = apply_filters_deprecated(
 			'yoast-acf-analysis/scraper_config',
-			array( $this->scraper_config ),
+			[ $this->scraper_config ],
 			'YoastSEO ACF 2.4.0',
 			'Yoast\WP\ACF\scraper_config'
 		);
@@ -235,7 +235,7 @@ class Yoast_ACF_Analysis_Configuration {
 			return $scraper_config;
 		}
 
-		return array();
+		return [];
 	}
 
 	/**
@@ -254,7 +254,7 @@ class Yoast_ACF_Analysis_Configuration {
 		 */
 		$refresh_rate = apply_filters_deprecated(
 			'yoast-acf-analysis/refresh_rate',
-			array( $this->refresh_rate ),
+			[ $this->refresh_rate ],
 			'YoastSEO ACF 2.4.0',
 			'Yoast\WP\ACF\refresh_rate'
 		);
@@ -293,7 +293,7 @@ class Yoast_ACF_Analysis_Configuration {
 		 */
 		$field_selectors = apply_filters_deprecated(
 			'yoast-acf-analysis/field_selectors',
-			array( $this->field_selectors ),
+			[ $this->field_selectors ],
 			'YoastSEO ACF 2.4.0',
 			'Yoast\WP\ACF\field_selectors'
 		);
@@ -343,7 +343,7 @@ class Yoast_ACF_Analysis_Configuration {
 		 */
 		$field_order = apply_filters_deprecated(
 			'yoast-acf-analysis/field_order',
-			array( array() ),
+			[ [] ],
 			'YoastSEO ACF 2.4.0',
 			'Yoast\WP\ACF\field_order'
 		);
@@ -376,7 +376,7 @@ class Yoast_ACF_Analysis_Configuration {
 	 * @return array
 	 */
 	public function to_array() {
-		return array(
+		return [
 			'pluginName'     => Yoast_ACF_Analysis_Facade::get_plugin_name(),
 			'acfVersion'     => $this->get_acf_version(),
 			'scraper'        => $this->get_scraper_config(),
@@ -386,6 +386,6 @@ class Yoast_ACF_Analysis_Configuration {
 			'fieldSelectors' => $this->get_field_selectors()->to_array(),
 			'fieldOrder'     => $this->get_field_order(),
 			'debug'          => $this->is_debug(),
-		);
+		];
 	}
 }
