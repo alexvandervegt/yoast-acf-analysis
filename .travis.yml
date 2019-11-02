@@ -1,6 +1,5 @@
 language: php
 dist: trusty
-sudo: false
 
 cache:
   yarn: true
@@ -23,20 +22,17 @@ matrix:
   include:
     - php: 7.3
       env: PHPCS=1 CHECKJS=1 PHPUNIT=1 SECURITY=1 TRAVIS_NODE_VERSION=node
-    - php: 5.2
-      dist: precise
-    - php: 5.3
-      dist: precise
     - php: 5.6
       env: PHPUNIT=1
     - php: 7.0
       env: PHPUNIT=1
     - php: "7.4snapshot"
       env: PHPUNIT=1
+    - php: "nightly"
 
   allow_failures:
     # Allow failures for unstable builds.
-    - php: "7.4snapshot"
+    - php: "nightly"
 
 before_install:
 - export SECURITYCHECK_DIR=/tmp/security-checker
@@ -51,13 +47,11 @@ install:
 - if [[ "$SECURITY" == "1" ]]; then wget -P $SECURITYCHECK_DIR https://get.sensiolabs.org/security-checker.phar && chmod +x $SECURITYCHECK_DIR/security-checker.phar;fi
 
 script:
-# Exclude tests directory from linting for PHP 5.2/3
-- if [[ $TRAVIS_PHP_VERSION == "5.2" || $TRAVIS_PHP_VERSION == "5.3" ]]; then if find -L . -path ./vendor -prune -o -path ./node_modules -prune -o -path ./tests -prune -o -name '*.php' -exec php -l {} \; | grep "^[Parse error|Fatal error]"; then exit 1; fi; fi
-- if [[ $TRAVIS_PHP_VERSION != "5.2" && $TRAVIS_PHP_VERSION != "5.3" ]]; then if find -L . -path ./vendor -prune -o -path ./node_modules -prune -o -name '*.php' -exec php -l {} \; | grep "^[Parse error|Fatal error]"; then exit 1; fi; fi
+- if find -L . -path ./vendor -prune -o -path ./node_modules -prune -o -name '*.php' -exec php -l {} \; | grep "^[Parse error|Fatal error]"; then exit 1; fi
 # Run PHPCS separately for the plugin files and the test files.
 - if [[ "$PHPCS" == "1" ]]; then composer check-cs; fi
 - if [[ "$CHECKJS" == "1" ]]; then grunt check; fi
 - if [[ "$PHPUNIT" == "1" ]]; then composer test; fi
-- if [[ $TRAVIS_PHP_VERSION == "5.3" || $TRAVIS_PHP_VERSION == "7.3" ]]; then composer validate --no-check-all; fi
+- if [[ $TRAVIS_PHP_VERSION == "5.6" || $TRAVIS_PHP_VERSION == "7.3" ]]; then composer validate --no-check-all; fi
 # Check for known security vulnerabilities in the currently locked-in dependencies.
 - if [[ "$SECURITY" == "1" ]]; then php $SECURITYCHECK_DIR/security-checker.phar -n security:check $(pwd)/composer.lock;fi
