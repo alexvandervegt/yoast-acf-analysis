@@ -27,7 +27,7 @@ class Yoast_ACF_Analysis_Facade {
 	public static function get_registry() {
 		static $registry = null;
 
-		if ( null === $registry ) {
+		if ( $registry === null ) {
 			$registry = new Yoast_ACF_Analysis_Registry();
 		}
 

@@ -53,7 +53,7 @@ class AC_Yoast_SEO_ACF_Content_Analysis {
 
 		$configuration = $registry->get( 'config' );
 
-		if ( null !== $configuration && $configuration instanceof Yoast_ACF_Analysis_Configuration ) {
+		if ( $configuration !== null && $configuration instanceof Yoast_ACF_Analysis_Configuration ) {
 			return;
 		}
 
