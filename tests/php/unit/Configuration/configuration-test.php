@@ -101,7 +101,7 @@ class Configuration_Test extends TestCase {
 
 		$blacklist_type2 = new \Yoast_ACF_Analysis_String_Store();
 
-		Filters\expectApplied( \Yoast_ACF_Analysis_Facade::get_filter_name( 'blacklist_type' ) )
+		Filters\expectApplied( 'Yoast\WP\ACF\blacklist_type' )
 			->once()
 			->with( $blacklist_type )
 			->andReturn( $blacklist_type2 );
@@ -124,7 +124,7 @@ class Configuration_Test extends TestCase {
 			new \Yoast_ACF_Analysis_String_Store()
 		);
 
-		Filters\expectApplied( \Yoast_ACF_Analysis_Facade::get_filter_name( 'blacklist_type' ) )
+		Filters\expectApplied( 'Yoast\WP\ACF\blacklist_type' )
 			->once()
 			->with( $store )
 			->andReturn( '' );
@@ -149,7 +149,7 @@ class Configuration_Test extends TestCase {
 
 		$blacklist_name2 = new \Yoast_ACF_Analysis_String_Store();
 
-		Filters\expectApplied( \Yoast_ACF_Analysis_Facade::get_filter_name( 'blacklist_name' ) )
+		Filters\expectApplied( 'Yoast\WP\ACF\blacklist_name' )
 			->once()
 			->with( $blacklist_name )
 			->andReturn( $blacklist_name2 );
@@ -241,7 +241,7 @@ class Configuration_Test extends TestCase {
 			new \Yoast_ACF_Analysis_String_Store()
 		);
 
-		Filters\expectApplied( \Yoast_ACF_Analysis_Facade::get_filter_name( 'blacklist_name' ) )
+		Filters\expectApplied( 'Yoast\WP\ACF\blacklist_name' )
 			->once()
 			->with( $store )
 			->andReturn( '' );
@@ -264,7 +264,7 @@ class Configuration_Test extends TestCase {
 			new \Yoast_ACF_Analysis_String_Store()
 		);
 
-		Filters\expectApplied( \Yoast_ACF_Analysis_Facade::get_filter_name( 'scraper_config' ) )
+		Filters\expectApplied( 'Yoast\WP\ACF\scraper_config' )
 			->once()
 			->with( [] )
 			->andReturn( $config );
@@ -286,7 +286,7 @@ class Configuration_Test extends TestCase {
 			new \Yoast_ACF_Analysis_String_Store()
 		);
 
-		Filters\expectApplied( \Yoast_ACF_Analysis_Facade::get_filter_name( 'scraper_config' ) )
+		Filters\expectApplied( 'Yoast\WP\ACF\scraper_config' )
 			->once()
 			->with( [] )
 			->andReturn( '' );
@@ -300,7 +300,7 @@ class Configuration_Test extends TestCase {
 	 * @return void
 	 */
 	public function testRefreshRateFilter() {
-		Filters\expectApplied( \Yoast_ACF_Analysis_Facade::get_filter_name( 'refresh_rate' ) )
+		Filters\expectApplied( 'Yoast\WP\ACF\refresh_rate' )
 			->once()
 			->with( 1000 )
 			->andReturn( 9999 );
@@ -320,7 +320,7 @@ class Configuration_Test extends TestCase {
 	 * @return void
 	 */
 	public function testRefreshRateMinimumValueFilter() {
-		Filters\expectApplied( \Yoast_ACF_Analysis_Facade::get_filter_name( 'refresh_rate' ) )
+		Filters\expectApplied( 'Yoast\WP\ACF\refresh_rate' )
 			->once()
 			->with( 1000 )
 			->andReturn( 1 );
@@ -349,7 +349,7 @@ class Configuration_Test extends TestCase {
 			$field_selector
 		);
 
-		Filters\expectApplied( \Yoast_ACF_Analysis_Facade::get_filter_name( 'field_selectors' ) )
+		Filters\expectApplied( 'Yoast\WP\ACF\field_selectors' )
 			->once()
 			->with( $field_selector )
 			->andReturn( $custom_store );
@@ -372,7 +372,7 @@ class Configuration_Test extends TestCase {
 			$store
 		);
 
-		Filters\expectApplied( \Yoast_ACF_Analysis_Facade::get_filter_name( 'field_selectors' ) )
+		Filters\expectApplied( 'Yoast\WP\ACF\field_selectors' )
 			->once()
 			->with( $store )
 			->andReturn( '' );

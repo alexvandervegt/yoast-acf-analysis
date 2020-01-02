@@ -15,7 +15,7 @@ class Yoast_ACF_Analysis_Requirements {
 	 *
 	 * @var Yoast_ACF_Analysis_Dependency[]
 	 */
-	protected $dependencies = array();
+	protected $dependencies = [];
 
 	/**
 	 * Adds a dependency.

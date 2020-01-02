@@ -36,7 +36,15 @@
 	#############################################################################
 	-->
 
-	<rule ref="Yoast"/>
+	<rule ref="Yoast">
+		<properties>
+			<!-- Provide the plugin specific prefixes for all naming related sniffs. -->
+			<property name="prefixes" type="array">
+				<element value="Yoast\WP\ACF"/>
+				<element value="yoast_acf"/>
+			</property>
+		</properties>
+	</rule>
 
 
 	<!--
@@ -57,38 +65,28 @@
 	<rule ref="Yoast.Files.FileName">
 		<properties>
 			<!-- Don't trigger on the main file as renaming it would deactivate the plugin. -->
-			<property name="exclude" type="array">
+			<property name="excluded_files_strict_check" type="array">
 				<element value="yoast-acf-analysis.php"/>
 			</property>
 
 			<!-- Remove the following prefixes from the names of object structures. -->
-			<property name="prefixes" type="array">
+			<property name="oo_prefixes" type="array">
 				<element value="Yoast_ACF_Analysis"/>
 				<element value="yoast_acf"/>
 			</property>
 		</properties>
 	</rule>
 
-	<!-- Verify that everything in the global namespace is prefixed with a plugin specific prefix. -->
-	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
+	<rule ref="Yoast.NamingConventions.NamespaceName">
 		<properties>
-			<!-- Provide the prefixes to look for. -->
-			<property name="prefixes" type="array">
-				<!-- Temporarily allowed until the prefixes are fixed. -->
-				<element value="AC_Yoast"/>
-				<element value="AC_SEO"/>
-				<element value="ysacf"/>
-				<!-- These are the new prefixes which all code should comply with in the future. -->
-				<element value="yoast_acf"/>
-				<element value="Yoast\WP\ACF"/>
+			<!-- Treat the "tests/php/unit" directory as a project root for path to namespace translations. -->
+			<property name="src_directory" type="array">
+				<element value="tests/php/unit"/>
 			</property>
-		</properties>
-	</rule>
 
-	<!-- Allow additional word delimiters for hook names. -->
-	<rule ref="WordPress.NamingConventions.ValidHookName">
-		<properties>
-			<property name="additionalWordDelimiters" value="/"/>
+			<property name="prefixes" type="array" extend="true">
+				<element value="Yoast\WP\ACF\Tests"/>
+			</property>
 		</properties>
 	</rule>
 
@@ -105,18 +103,15 @@
 
 	<!--
 	#############################################################################
-	TEMPORARY TWEAK
-	YoastCS will demand short arrays, but until support for WP < 5.2 has been
-	dropped, this can - for now - only be allowed (and enforced) for the folders
-	containing PHP 5.6+ code.
+	SELECTIVE EXCLUSIONS
+	Exclude specific files for specific sniffs and/or exclude sub-groups in sniffs.
 	#############################################################################
 	-->
 
-	<rule ref="Generic.Arrays.DisallowShortArraySyntax">
-		<exclude-pattern>/tests/*</exclude-pattern>
-	</rule>
-	<rule ref="Generic.Arrays.DisallowLongArraySyntax">
-		<include-pattern>/tests/*</include-pattern>
+	<!-- Valid usage: For testing purposes, some non-prefixed globals are being created. -->
+	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
+		<exclude-pattern>/integration-tests/bootstrap\.php$</exclude-pattern>
+		<exclude-pattern>/tests/bootstrap\.php$</exclude-pattern>
 	</rule>
 
 
@@ -126,6 +121,16 @@
 	Adjustments which should be removed once the associated issue has been resolved.
 	#############################################################################
 	-->
+
+	<!-- Until all prefixes are fixed, some exceptions are allowed to the PrefixAllGlobals sniff. -->
+	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
+		<properties>
+			<property name="prefixes" type="array" extend="true">
+				<element value="AC_Yoast"/>
+				<element value="AC_SEO"/>
+			</property>
+		</properties>
+	</rule>
 
 	<!-- Namespaced test classes imported via a use statement are not yet correctly excluded
 		 by WPCS. This will most likely be fixed once PHPCS 3.5.0 has been released and
