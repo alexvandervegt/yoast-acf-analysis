@@ -66,6 +66,6 @@ class ACF_Dependency_Test extends TestCase {
 		$testee = new Yoast_ACF_Analysis_Dependency_ACF();
 		$testee->register_notifications();
 
-		$this->assertTrue( has_action( 'admin_notices', [ $testee, 'message_plugin_not_activated' ] ) );
+		$this->assertTrue( \has_action( 'admin_notices', [ $testee, 'message_plugin_not_activated' ] ) );
 	}
 }
