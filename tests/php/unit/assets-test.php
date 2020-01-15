@@ -56,7 +56,7 @@ class Assets_Test extends TestCase {
 		define( 'AC_SEO_ACF_ANALYSIS_PLUGIN_FILE', '/directory/file' );
 		Functions\expect( 'get_plugin_data' )
 			->once()
-			->with( AC_SEO_ACF_ANALYSIS_PLUGIN_FILE )
+			->with( \AC_SEO_ACF_ANALYSIS_PLUGIN_FILE )
 			->andReturn(
 				[
 					'Version' => '2.0.0',
