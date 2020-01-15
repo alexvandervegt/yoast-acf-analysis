@@ -30,8 +30,6 @@ class Yoast_ACF_Analysis_Assets {
 	 * Enqueue JavaScript file to feed data to Yoast Content Analyses.
 	 */
 	public function enqueue_scripts() {
-		global $pagenow;
-
 		/**
 		 * Yoast ACF plugin configuration.
 		 *
