@@ -5,6 +5,7 @@ namespace Yoast\WP\ACF\Tests;
 use Brain\Monkey;
 use Brain\Monkey\Functions;
 use PHPUnit\Framework\TestCase;
+use Yoast_ACF_Analysis_Assets;
 
 /**
  * Class Assets_Test.
@@ -63,7 +64,7 @@ class Assets_Test extends TestCase {
 				]
 			);
 
-		$testee = new \Yoast_ACF_Analysis_Assets();
+		$testee = new Yoast_ACF_Analysis_Assets();
 		$testee->init();
 
 		$this->assertTrue( has_filter( 'admin_enqueue_scripts', [ $testee, 'enqueue_scripts' ] ) );

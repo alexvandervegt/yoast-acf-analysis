@@ -2,10 +2,12 @@
 
 namespace Yoast\WP\ACF\Tests\Doubles;
 
+use Yoast_ACF_Analysis_Dependency;
+
 /**
  * Class Passing_Dependency.
  */
-class Passing_Dependency implements \Yoast_ACF_Analysis_Dependency {
+class Passing_Dependency implements Yoast_ACF_Analysis_Dependency {
 
 	/**
 	 * Checks if this dependency is met.
