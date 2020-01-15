@@ -4,7 +4,6 @@ namespace Yoast\WP\ACF\Tests;
 
 use Brain\Monkey;
 use Brain\Monkey\Functions;
-use Brain\Monkey\Filters;
 use PHPUnit\Framework\TestCase;
 use Yoast_ACF_Analysis_Requirements;
 use Yoast\WP\ACF\Tests\Doubles\Passing_Dependency;
