@@ -6,6 +6,7 @@ use Brain\Monkey;
 use Brain\Monkey\Functions;
 use Brain\Monkey\Filters;
 use PHPUnit\Framework\TestCase;
+use Yoast_ACF_Analysis_Requirements;
 use Yoast\WP\ACF\Tests\Doubles\Passing_Dependency;
 use Yoast\WP\ACF\Tests\Doubles\Failing_Dependency;
 
@@ -40,7 +41,7 @@ class Requirements_Test extends TestCase {
 	 * @return void
 	 */
 	public function testNoDependencies() {
-		$testee = new \Yoast_ACF_Analysis_Requirements();
+		$testee = new Yoast_ACF_Analysis_Requirements();
 		$this->assertTrue( $testee->are_met() );
 	}
 
@@ -53,7 +54,7 @@ class Requirements_Test extends TestCase {
 	 * @return void
 	 */
 	public function testPassingDependency() {
-		$testee = new \Yoast_ACF_Analysis_Requirements();
+		$testee = new Yoast_ACF_Analysis_Requirements();
 		$testee->add_dependency( new Passing_Dependency() );
 
 		$this->assertTrue( $testee->are_met() );
@@ -68,7 +69,7 @@ class Requirements_Test extends TestCase {
 	 * @return void
 	 */
 	public function testFailingDependency() {
-		$testee = new \Yoast_ACF_Analysis_Requirements();
+		$testee = new Yoast_ACF_Analysis_Requirements();
 		$testee->add_dependency( new Failing_Dependency() );
 
 		$this->assertFalse( $testee->are_met() );
@@ -83,7 +84,7 @@ class Requirements_Test extends TestCase {
 	 * @return void
 	 */
 	public function testMixedDependencies() {
-		$testee = new \Yoast_ACF_Analysis_Requirements();
+		$testee = new Yoast_ACF_Analysis_Requirements();
 		$testee->add_dependency( new Failing_Dependency() );
 		$testee->add_dependency( new Passing_Dependency() );
 

@@ -6,6 +6,9 @@ use Brain\Monkey;
 use Brain\Monkey\Filters;
 use Brain\Monkey\Functions;
 use PHPUnit\Framework\TestCase;
+use Yoast_ACF_Analysis_Configuration;
+use Yoast_ACF_Analysis_String_Store;
+use Yoast_ACF_Analysis_Facade;
 
 /**
  * Class Configuration_Test.
@@ -41,15 +44,15 @@ class Configuration_Test extends TestCase {
 	 */
 	public function testEmpty() {
 
-		$configuration = new \Yoast_ACF_Analysis_Configuration(
-			new \Yoast_ACF_Analysis_String_Store(),
-			new \Yoast_ACF_Analysis_String_Store(),
-			new \Yoast_ACF_Analysis_String_Store()
+		$configuration = new Yoast_ACF_Analysis_Configuration(
+			new Yoast_ACF_Analysis_String_Store(),
+			new Yoast_ACF_Analysis_String_Store(),
+			new Yoast_ACF_Analysis_String_Store()
 		);
 
 		$this->assertSame(
 			[
-				'pluginName'     => \Yoast_ACF_Analysis_Facade::get_plugin_name(),
+				'pluginName'     => Yoast_ACF_Analysis_Facade::get_plugin_name(),
 				'acfVersion'     => 'version',
 				'scraper'        => [],
 				'refreshRate'    => 1000,
@@ -74,10 +77,10 @@ class Configuration_Test extends TestCase {
 		$acf_version = '5.0.0';
 		Functions\when( 'acf_get_setting' )->justReturn( $acf_version );
 
-		$configuration = new \Yoast_ACF_Analysis_Configuration(
-			new \Yoast_ACF_Analysis_String_Store(),
-			new \Yoast_ACF_Analysis_String_Store(),
-			new \Yoast_ACF_Analysis_String_Store()
+		$configuration = new Yoast_ACF_Analysis_Configuration(
+			new Yoast_ACF_Analysis_String_Store(),
+			new Yoast_ACF_Analysis_String_Store(),
+			new Yoast_ACF_Analysis_String_Store()
 		);
 		$config        = $configuration->to_array();
 
@@ -91,15 +94,15 @@ class Configuration_Test extends TestCase {
 	 */
 	public function testBlacklistTypeFilter() {
 
-		$blacklist_type = new \Yoast_ACF_Analysis_String_Store();
+		$blacklist_type = new Yoast_ACF_Analysis_String_Store();
 
-		$configuration = new \Yoast_ACF_Analysis_Configuration(
+		$configuration = new Yoast_ACF_Analysis_Configuration(
 			$blacklist_type,
-			new \Yoast_ACF_Analysis_String_Store(),
-			new \Yoast_ACF_Analysis_String_Store()
+			new Yoast_ACF_Analysis_String_Store(),
+			new Yoast_ACF_Analysis_String_Store()
 		);
 
-		$blacklist_type2 = new \Yoast_ACF_Analysis_String_Store();
+		$blacklist_type2 = new Yoast_ACF_Analysis_String_Store();
 
 		Filters\expectApplied( 'Yoast\WP\ACF\blacklist_type' )
 			->once()
@@ -116,12 +119,12 @@ class Configuration_Test extends TestCase {
 	 */
 	public function testBlacklistTypeFilterInvalid() {
 
-		$store = new \Yoast_ACF_Analysis_String_Store();
+		$store = new Yoast_ACF_Analysis_String_Store();
 
-		$configuration = new \Yoast_ACF_Analysis_Configuration(
+		$configuration = new Yoast_ACF_Analysis_Configuration(
 			$store,
-			new \Yoast_ACF_Analysis_String_Store(),
-			new \Yoast_ACF_Analysis_String_Store()
+			new Yoast_ACF_Analysis_String_Store(),
+			new Yoast_ACF_Analysis_String_Store()
 		);
 
 		Filters\expectApplied( 'Yoast\WP\ACF\blacklist_type' )
@@ -139,15 +142,15 @@ class Configuration_Test extends TestCase {
 	 */
 	public function testBlacklistNameFilter() {
 
-		$blacklist_name = new \Yoast_ACF_Analysis_String_Store();
+		$blacklist_name = new Yoast_ACF_Analysis_String_Store();
 
-		$configuration = new \Yoast_ACF_Analysis_Configuration(
-			new \Yoast_ACF_Analysis_String_Store(),
+		$configuration = new Yoast_ACF_Analysis_Configuration(
+			new Yoast_ACF_Analysis_String_Store(),
 			$blacklist_name,
-			new \Yoast_ACF_Analysis_String_Store()
+			new Yoast_ACF_Analysis_String_Store()
 		);
 
-		$blacklist_name2 = new \Yoast_ACF_Analysis_String_Store();
+		$blacklist_name2 = new Yoast_ACF_Analysis_String_Store();
 
 		Filters\expectApplied( 'Yoast\WP\ACF\blacklist_name' )
 			->once()
@@ -164,12 +167,12 @@ class Configuration_Test extends TestCase {
 	 */
 	public function testLegacyBlackistNameFilter() {
 
-		$blacklist_name = new \Yoast_ACF_Analysis_String_Store();
+		$blacklist_name = new Yoast_ACF_Analysis_String_Store();
 
-		$configuration = new \Yoast_ACF_Analysis_Configuration(
-			new \Yoast_ACF_Analysis_String_Store(),
+		$configuration = new Yoast_ACF_Analysis_Configuration(
+			new Yoast_ACF_Analysis_String_Store(),
 			$blacklist_name,
-			new \Yoast_ACF_Analysis_String_Store()
+			new Yoast_ACF_Analysis_String_Store()
 		);
 
 		Filters\expectApplied( 'ysacf_exclude_fields' )
@@ -203,12 +206,12 @@ class Configuration_Test extends TestCase {
 	 */
 	public function testLegacyBlackistNameFilterInvalid() {
 
-		$blacklist_name = new \Yoast_ACF_Analysis_String_Store();
+		$blacklist_name = new Yoast_ACF_Analysis_String_Store();
 
-		$configuration = new \Yoast_ACF_Analysis_Configuration(
-			new \Yoast_ACF_Analysis_String_Store(),
+		$configuration = new Yoast_ACF_Analysis_Configuration(
+			new Yoast_ACF_Analysis_String_Store(),
 			$blacklist_name,
-			new \Yoast_ACF_Analysis_String_Store()
+			new Yoast_ACF_Analysis_String_Store()
 		);
 
 		Filters\expectApplied( 'ysacf_exclude_fields' )
@@ -233,12 +236,12 @@ class Configuration_Test extends TestCase {
 	 */
 	public function testBlacklistNameFilterInvalid() {
 
-		$store = new \Yoast_ACF_Analysis_String_Store();
+		$store = new Yoast_ACF_Analysis_String_Store();
 
-		$configuration = new \Yoast_ACF_Analysis_Configuration(
-			new \Yoast_ACF_Analysis_String_Store(),
+		$configuration = new Yoast_ACF_Analysis_Configuration(
+			new Yoast_ACF_Analysis_String_Store(),
 			$store,
-			new \Yoast_ACF_Analysis_String_Store()
+			new Yoast_ACF_Analysis_String_Store()
 		);
 
 		Filters\expectApplied( 'Yoast\WP\ACF\blacklist_name' )
@@ -256,12 +259,12 @@ class Configuration_Test extends TestCase {
 	 */
 	public function testScraperConfigFilter() {
 		$config    = [];
-		$blacklist = new \Yoast_ACF_Analysis_String_Store();
+		$blacklist = new Yoast_ACF_Analysis_String_Store();
 
-		$configuration = new \Yoast_ACF_Analysis_Configuration(
+		$configuration = new Yoast_ACF_Analysis_Configuration(
 			$blacklist,
-			new \Yoast_ACF_Analysis_String_Store(),
-			new \Yoast_ACF_Analysis_String_Store()
+			new Yoast_ACF_Analysis_String_Store(),
+			new Yoast_ACF_Analysis_String_Store()
 		);
 
 		Filters\expectApplied( 'Yoast\WP\ACF\scraper_config' )
@@ -278,12 +281,12 @@ class Configuration_Test extends TestCase {
 	 * @return void
 	 */
 	public function testInvalidScraperConfigFilter() {
-		$blacklist = new \Yoast_ACF_Analysis_String_Store();
+		$blacklist = new Yoast_ACF_Analysis_String_Store();
 
-		$configuration = new \Yoast_ACF_Analysis_Configuration(
+		$configuration = new Yoast_ACF_Analysis_Configuration(
 			$blacklist,
-			new \Yoast_ACF_Analysis_String_Store(),
-			new \Yoast_ACF_Analysis_String_Store()
+			new Yoast_ACF_Analysis_String_Store(),
+			new Yoast_ACF_Analysis_String_Store()
 		);
 
 		Filters\expectApplied( 'Yoast\WP\ACF\scraper_config' )
@@ -305,10 +308,10 @@ class Configuration_Test extends TestCase {
 			->with( 1000 )
 			->andReturn( 9999 );
 
-		$configuration = new \Yoast_ACF_Analysis_Configuration(
-			new \Yoast_ACF_Analysis_String_Store(),
-			new \Yoast_ACF_Analysis_String_Store(),
-			new \Yoast_ACF_Analysis_String_Store()
+		$configuration = new Yoast_ACF_Analysis_Configuration(
+			new Yoast_ACF_Analysis_String_Store(),
+			new Yoast_ACF_Analysis_String_Store(),
+			new Yoast_ACF_Analysis_String_Store()
 		);
 
 		$this->assertSame( 9999, $configuration->get_refresh_rate() );
@@ -325,10 +328,10 @@ class Configuration_Test extends TestCase {
 			->with( 1000 )
 			->andReturn( 1 );
 
-		$configuration = new \Yoast_ACF_Analysis_Configuration(
-			new \Yoast_ACF_Analysis_String_Store(),
-			new \Yoast_ACF_Analysis_String_Store(),
-			new \Yoast_ACF_Analysis_String_Store()
+		$configuration = new Yoast_ACF_Analysis_Configuration(
+			new Yoast_ACF_Analysis_String_Store(),
+			new Yoast_ACF_Analysis_String_Store(),
+			new Yoast_ACF_Analysis_String_Store()
 		);
 
 		$this->assertSame( 200, $configuration->get_refresh_rate() );
@@ -340,12 +343,12 @@ class Configuration_Test extends TestCase {
 	 * @return void
 	 */
 	public function testFieldSelectorsFilter() {
-		$custom_store   = new \Yoast_ACF_Analysis_String_Store();
-		$field_selector = new \Yoast_ACF_Analysis_String_Store();
+		$custom_store   = new Yoast_ACF_Analysis_String_Store();
+		$field_selector = new Yoast_ACF_Analysis_String_Store();
 
-		$configuration = new \Yoast_ACF_Analysis_Configuration(
-			new \Yoast_ACF_Analysis_String_Store(),
-			new \Yoast_ACF_Analysis_String_Store(),
+		$configuration = new Yoast_ACF_Analysis_Configuration(
+			new Yoast_ACF_Analysis_String_Store(),
+			new Yoast_ACF_Analysis_String_Store(),
 			$field_selector
 		);
 
@@ -364,11 +367,11 @@ class Configuration_Test extends TestCase {
 	 */
 	public function testFieldSelectorsFilterInvalid() {
 
-		$store = new \Yoast_ACF_Analysis_String_Store();
+		$store = new Yoast_ACF_Analysis_String_Store();
 
-		$configuration = new \Yoast_ACF_Analysis_Configuration(
-			new \Yoast_ACF_Analysis_String_Store(),
-			new \Yoast_ACF_Analysis_String_Store(),
+		$configuration = new Yoast_ACF_Analysis_Configuration(
+			new Yoast_ACF_Analysis_String_Store(),
+			new Yoast_ACF_Analysis_String_Store(),
 			$store
 		);
 

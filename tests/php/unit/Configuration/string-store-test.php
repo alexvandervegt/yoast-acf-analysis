@@ -3,6 +3,7 @@
 namespace Yoast\WP\ACF\Tests\Configuration;
 
 use PHPUnit\Framework\TestCase;
+use Yoast_ACF_Analysis_String_Store;
 
 /**
  * Class String_Store_Test.
@@ -17,7 +18,7 @@ class String_Store_Test extends TestCase {
 	 * @return \Yoast_ACF_Analysis_String_Store The blacklist string store.
 	 */
 	protected function getStore() {
-		return new \Yoast_ACF_Analysis_String_Store();
+		return new Yoast_ACF_Analysis_String_Store();
 	}
 
 	/**

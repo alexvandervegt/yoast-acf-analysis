@@ -4,6 +4,7 @@ namespace Yoast\WP\ACF\Tests\Dependencies;
 
 use Brain\Monkey;
 use PHPUnit\Framework\TestCase;
+use Yoast_ACF_Analysis_Dependency_Yoast_SEO;
 
 /**
  * Class Yoast_SEO_Dependency_Test.
@@ -52,7 +53,7 @@ class Yoast_SEO_Dependency_Test extends TestCase {
 	 * @return void
 	 */
 	public function testFail() {
-		$testee = new \Yoast_ACF_Analysis_Dependency_Yoast_SEO();
+		$testee = new Yoast_ACF_Analysis_Dependency_Yoast_SEO();
 
 		$this->assertFalse( $testee->is_met() );
 	}
@@ -65,7 +66,7 @@ class Yoast_SEO_Dependency_Test extends TestCase {
 	public function testPass() {
 		define( 'WPSEO_VERSION', '4.0.0' );
 
-		$testee = new \Yoast_ACF_Analysis_Dependency_Yoast_SEO();
+		$testee = new Yoast_ACF_Analysis_Dependency_Yoast_SEO();
 		$this->assertTrue( $testee->is_met() );
 	}
 
@@ -77,7 +78,7 @@ class Yoast_SEO_Dependency_Test extends TestCase {
 	public function testOldVersion() {
 		define( 'WPSEO_VERSION', '2.0.0' );
 
-		$testee = new \Yoast_ACF_Analysis_Dependency_Yoast_SEO();
+		$testee = new Yoast_ACF_Analysis_Dependency_Yoast_SEO();
 		$this->assertFalse( $testee->is_met() );
 	}
 
@@ -87,7 +88,7 @@ class Yoast_SEO_Dependency_Test extends TestCase {
 	 * @return void
 	 */
 	public function testAdminNotice() {
-		$testee = new \Yoast_ACF_Analysis_Dependency_Yoast_SEO();
+		$testee = new Yoast_ACF_Analysis_Dependency_Yoast_SEO();
 		$testee->register_notifications();
 
 		$this->assertTrue( has_action( 'admin_notices', [ $testee, 'message_plugin_not_activated' ] ) );
@@ -101,7 +102,7 @@ class Yoast_SEO_Dependency_Test extends TestCase {
 	public function testAdminNoticeMinimumVersion() {
 		define( 'WPSEO_VERSION', '2.0.0' );
 
-		$testee = new \Yoast_ACF_Analysis_Dependency_Yoast_SEO();
+		$testee = new Yoast_ACF_Analysis_Dependency_Yoast_SEO();
 		$testee->register_notifications();
 
 		$this->assertTrue( has_action( 'admin_notices', [ $testee, 'message_minimum_version' ] ) );

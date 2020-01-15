@@ -3,6 +3,10 @@
 namespace Yoast\WP\ACF\Tests;
 
 use PHPUnit\Framework\TestCase;
+use Yoast_ACF_Analysis_Facade;
+use Yoast_ACF_Analysis_Configuration;
+use Yoast_ACF_Analysis_String_Store;
+use Yoast_ACF_Analysis_Registry;
 
 /**
  * Class Registry_Test.
@@ -20,17 +24,17 @@ class Registry_Test extends TestCase {
 	 */
 	public function testSingleton() {
 
-		$first  = \Yoast_ACF_Analysis_Facade::get_registry();
-		$second = \Yoast_ACF_Analysis_Facade::get_registry();
+		$first  = Yoast_ACF_Analysis_Facade::get_registry();
+		$second = Yoast_ACF_Analysis_Facade::get_registry();
 
 		$this->assertSame( $first, $second );
 
 		$first->add(
 			'id',
-			new \Yoast_ACF_Analysis_Configuration(
-				new \Yoast_ACF_Analysis_String_Store(),
-				new \Yoast_ACF_Analysis_String_Store(),
-				new \Yoast_ACF_Analysis_String_Store()
+			new Yoast_ACF_Analysis_Configuration(
+				new Yoast_ACF_Analysis_String_Store(),
+				new Yoast_ACF_Analysis_String_Store(),
+				new Yoast_ACF_Analysis_String_Store()
 			)
 		);
 
@@ -47,7 +51,7 @@ class Registry_Test extends TestCase {
 		$id      = 'add';
 		$content = 'something';
 
-		$registry = new \Yoast_ACF_Analysis_Registry();
+		$registry = new Yoast_ACF_Analysis_Registry();
 
 		$this->assertNull( $registry->get( $id ) );
 
