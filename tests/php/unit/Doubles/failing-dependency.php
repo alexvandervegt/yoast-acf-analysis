@@ -19,7 +19,7 @@ class Failing_Dependency implements Yoast_ACF_Analysis_Dependency {
 	}
 
 	/**
-	 * Registers the notifications to communicate the depedency is not met.
+	 * Registers the notifications to communicate the dependency is not met.
 	 *
 	 * @return void
 	 */

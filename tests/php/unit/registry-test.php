@@ -42,7 +42,7 @@ class Registry_Test extends TestCase {
 	}
 
 	/**
-	 * Tests that adding a non-existing item to the registy, succeeds and that the item can be found based on its ID.
+	 * Tests that adding a non-existing item to the registry, succeeds and that the item can be found based on its ID.
 	 *
 	 * @return void
 	 */
