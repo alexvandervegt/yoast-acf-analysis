@@ -121,7 +121,7 @@ class AC_Yoast_SEO_ACF_Content_Analysis {
 	 *
 	 * @param array $scraper_config The scraper configuration.
 	 *
-	 * @return array The enhanched scraper config.
+	 * @return array The enhanced scraper config.
 	 */
 	public function filter_scraper_config( $scraper_config ) {
 		/**

@@ -27,7 +27,7 @@ class Yoast_ACF_Analysis_Requirements {
 	}
 
 	/**
-	 * Checks if all depedencies are met.
+	 * Checks if all dependencies are met.
 	 *
 	 * @return bool True if all requirements are met.
 	 */
