@@ -241,6 +241,21 @@ module.exports = function() {
 		return field_data;
 	} );
 
+	// acf.get_fields() does not return block previews
+	var index = 0;
+	fields = _.union( fields, _.map( jQuery('.acf-block-preview'), function ( field ) {
+		var field_data = {
+			$el: jQuery( field ),
+			key: null,
+			type: "block_preview",
+			name: "block_preview_" + index,
+			post_meta_key: "block_preview_" + index,
+		};
+		innerFields.push( field_data );
+		index ++;
+		return field_data;
+	}));
+
 	if ( outerFields.length === 0 ) {
 		return fields;
 	}
@@ -399,7 +414,7 @@ var config = require( "./config/config.js" );
 
 var ReplaceVar = YoastReplaceVarPlugin.ReplaceVar;
 
-var supportedTypes = [ "email", "text", "textarea", "url", "wysiwyg" ];
+var supportedTypes = [ "email", "text", "textarea", "url", "wysiwyg", "block_preview" ];
 
 var replaceVars = {};
 
@@ -465,6 +480,8 @@ var scraperObjects = {
 	// TODO: Add oembed handler
 	image: require( "./scraper/scraper.image.js" ),
 	gallery: require( "./scraper/scraper.gallery.js" ),
+	// ACF blocks preview
+	block_preview: require( "./scraper/scraper.block_preview.js" ),
 
 	// Choice
 	// TODO: select, checkbox, radio
@@ -545,7 +562,28 @@ module.exports = {
 	getScraper: getScraper,
 };
 
-},{"./config/config.js":7,"./scraper/scraper.email.js":12,"./scraper/scraper.gallery.js":13,"./scraper/scraper.image.js":14,"./scraper/scraper.link.js":15,"./scraper/scraper.taxonomy.js":16,"./scraper/scraper.text.js":17,"./scraper/scraper.textarea.js":18,"./scraper/scraper.url.js":19,"./scraper/scraper.wysiwyg.js":20}],12:[function(require,module,exports){
+},{"./config/config.js":7,"./scraper/scraper.block_preview.js":12,"./scraper/scraper.email.js":13,"./scraper/scraper.gallery.js":14,"./scraper/scraper.image.js":15,"./scraper/scraper.link.js":16,"./scraper/scraper.taxonomy.js":17,"./scraper/scraper.text.js":18,"./scraper/scraper.textarea.js":19,"./scraper/scraper.url.js":20,"./scraper/scraper.wysiwyg.js":21}],12:[function(require,module,exports){
+/* global _ */
+
+var Scraper = function() {};
+
+Scraper.prototype.scrape = function( fields ) {
+	fields = _.map( fields, function( field ) {
+		if ( field.type !== "block_preview" ) {
+			return field;
+		}
+
+		field.content = field.$el.html();
+
+		return field;
+	} );
+
+	return fields;
+};
+
+module.exports = Scraper;
+
+},{}],13:[function(require,module,exports){
 /* global _ */
 
 var Scraper = function() {};
@@ -566,7 +604,7 @@ Scraper.prototype.scrape = function( fields ) {
 
 module.exports = Scraper;
 
-},{}],13:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 /* global _, jQuery */
 
 var attachmentCache = require( "./../cache/cache.attachments.js" );
@@ -608,7 +646,7 @@ Scraper.prototype.scrape = function( fields ) {
 
 module.exports = Scraper;
 
-},{"./../cache/cache.attachments.js":2}],14:[function(require,module,exports){
+},{"./../cache/cache.attachments.js":2}],15:[function(require,module,exports){
 /* global _ */
 
 var attachmentCache = require( "./../cache/cache.attachments.js" );
@@ -646,7 +684,7 @@ Scraper.prototype.scrape = function( fields ) {
 
 module.exports = Scraper;
 
-},{"./../cache/cache.attachments.js":2}],15:[function(require,module,exports){
+},{"./../cache/cache.attachments.js":2}],16:[function(require,module,exports){
 /* global _ */
 require( "./../scraper-store.js" );
 
@@ -681,7 +719,7 @@ Scraper.prototype.scrape = function( fields ) {
 
 module.exports = Scraper;
 
-},{"./../scraper-store.js":11}],16:[function(require,module,exports){
+},{"./../scraper-store.js":11}],17:[function(require,module,exports){
 /* global _, acf */
 
 var Scraper = function() {};
@@ -737,7 +775,7 @@ Scraper.prototype.scrape = function( fields ) {
 
 module.exports = Scraper;
 
-},{}],17:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 /* global _ */
 
 var config = require( "./../config/config.js" );
@@ -792,7 +830,7 @@ Scraper.prototype.isHeadline = function( field ) {
 
 module.exports = Scraper;
 
-},{"./../config/config.js":7}],18:[function(require,module,exports){
+},{"./../config/config.js":7}],19:[function(require,module,exports){
 /* global _ */
 
 var Scraper = function() {};
@@ -813,7 +851,7 @@ Scraper.prototype.scrape = function( fields ) {
 
 module.exports = Scraper;
 
-},{}],19:[function(require,module,exports){
+},{}],20:[function(require,module,exports){
 /* global _ */
 
 var Scraper = function() {};
@@ -836,7 +874,7 @@ Scraper.prototype.scrape = function( fields ) {
 
 module.exports = Scraper;
 
-},{}],20:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 /* global tinyMCE, _ */
 
 var Scraper = function() {};

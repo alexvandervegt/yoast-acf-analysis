@@ -25,6 +25,21 @@ module.exports = function() {
 		return field_data;
 	} );
 
+	// acf.get_fields() does not return block previews
+	var index = 0;
+	fields = _.union( fields, _.map( jQuery('.acf-block-preview'), function ( field ) {
+		var field_data = {
+			$el: jQuery( field ),
+			key: null,
+			type: "block_preview",
+			name: "block_preview_" + index,
+			post_meta_key: "block_preview_" + index,
+		};
+		innerFields.push( field_data );
+		index ++;
+		return field_data;
+	}));
+
 	if ( outerFields.length === 0 ) {
 		return fields;
 	}
