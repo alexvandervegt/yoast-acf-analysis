@@ -8,14 +8,14 @@ use Yoast_ACF_Analysis_String_Store;
 /**
  * Class String_Store_Test.
  *
- * @covers Yoast_ACF_Analysis_String_Store
+ * @covers \Yoast_ACF_Analysis_String_Store
  */
 class String_Store_Test extends TestCase {
 
 	/**
 	 * Gets the blacklist string store.
 	 *
-	 * @return \Yoast_ACF_Analysis_String_Store The blacklist string store.
+	 * @return Yoast_ACF_Analysis_String_Store The blacklist string store.
 	 */
 	protected function getStore() {
 		return new Yoast_ACF_Analysis_String_Store();
