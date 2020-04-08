@@ -33,7 +33,7 @@ class Yoast_ACF_Analysis_Assets {
 		/**
 		 * Yoast ACF plugin configuration.
 		 *
-		 * @var \Yoast_ACF_Analysis_Configuration
+		 * @var Yoast_ACF_Analysis_Configuration
 		 */
 		$config = Yoast_ACF_Analysis_Facade::get_registry()->get( 'config' );
 
