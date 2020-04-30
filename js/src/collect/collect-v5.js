@@ -1,4 +1,4 @@
-/* global _, acf, jQuery */
+/* global _, acf, jQuery, wp */
 
 module.exports = function() {
 	var outerFieldsName = [
@@ -10,20 +10,42 @@ module.exports = function() {
 	var innerFields = [];
 	var outerFields = [];
 
-	var fields = _.map( acf.get_fields(), function( field ) {
-		var field_data = jQuery.extend( true, {}, acf.get_data( jQuery( field ) ) );
-		field_data.$el = jQuery( field );
-		field_data.post_meta_key = field_data.name;
+	// Return only fields in metabox areas (either below or side) or
+	// ACF block fields in the content (not in the sidebar, to prevent duplicates)
+	var parentContainer = jQuery( ".metabox-location-normal, .metabox-location-side, .acf-block-component.acf-block-body" );
+	var fields = _.map( acf.get_fields( false, parentContainer ), function( field ) {
+		var fieldData = jQuery.extend( true, {}, acf.get_data( jQuery( field ) ) );
+		fieldData.$el = jQuery( field );
+		fieldData.post_meta_key = fieldData.name;
 
 		// Collect nested and parent
-		if ( outerFieldsName.indexOf( field_data.type ) === -1 ) {
-			innerFields.push( field_data );
+		if ( outerFieldsName.indexOf( fieldData.type ) === -1 ) {
+			innerFields.push( fieldData );
 		} else {
-			outerFields.push( field_data );
+			outerFields.push( fieldData );
 		}
 
-		return field_data;
+		return fieldData;
 	} );
+
+	// Add ACF block previews, they are not returned by acf.get_fields()
+	var blocks = wp.data.select( "core/block-editor" ).getBlocks();
+	var blockFields = _.map(
+		_.filter( blocks, function( block ) {
+			return block.name.startsWith( "acf/" ) && block.attributes.mode === "preview";
+		} ),
+		function( block ) {
+			var fieldData = {
+				$el: jQuery( `[data-block="${block.clientId}"] .acf-block-preview` ),
+				key: block.attributes.id,
+				type: "block_preview",
+				name: block.name,
+				post_meta_key: block.name,
+			};
+			innerFields.push( fieldData );
+			return fieldData;
+		} );
+	fields = _.union( fields, blockFields );
 
 	if ( outerFields.length === 0 ) {
 		return fields;

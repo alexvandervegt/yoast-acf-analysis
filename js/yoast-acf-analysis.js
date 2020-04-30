@@ -214,7 +214,7 @@ fields.each( function() {
 module.exports = field_data;
 
 },{"./../config/config.js":7}],5:[function(require,module,exports){
-/* global _, acf, jQuery */
+/* global _, acf, jQuery, wp */
 
 module.exports = function() {
 	var outerFieldsName = [
@@ -226,20 +226,42 @@ module.exports = function() {
 	var innerFields = [];
 	var outerFields = [];
 
-	var fields = _.map( acf.get_fields(), function( field ) {
-		var field_data = jQuery.extend( true, {}, acf.get_data( jQuery( field ) ) );
-		field_data.$el = jQuery( field );
-		field_data.post_meta_key = field_data.name;
+	// Return only fields in metabox areas (either below or side) or
+	// ACF block fields in the content (not in the sidebar, to prevent duplicates)
+	var parentContainer = jQuery( ".metabox-location-normal, .metabox-location-side, .acf-block-component.acf-block-body" );
+	var fields = _.map( acf.get_fields( false, parentContainer ), function( field ) {
+		var fieldData = jQuery.extend( true, {}, acf.get_data( jQuery( field ) ) );
+		fieldData.$el = jQuery( field );
+		fieldData.post_meta_key = fieldData.name;
 
 		// Collect nested and parent
-		if ( outerFieldsName.indexOf( field_data.type ) === -1 ) {
-			innerFields.push( field_data );
+		if ( outerFieldsName.indexOf( fieldData.type ) === -1 ) {
+			innerFields.push( fieldData );
 		} else {
-			outerFields.push( field_data );
+			outerFields.push( fieldData );
 		}
 
-		return field_data;
+		return fieldData;
 	} );
+
+	// Add ACF block previews, they are not returned by acf.get_fields()
+	var blocks = wp.data.select( "core/block-editor" ).getBlocks();
+	var blockFields = _.map(
+		_.filter( blocks, function( block ) {
+			return block.name.startsWith( "acf/" ) && block.attributes.mode === "preview";
+		} ),
+		function( block ) {
+			var fieldData = {
+				$el: jQuery( `[data-block="${block.clientId}"] .acf-block-preview` ),
+				key: block.attributes.id,
+				type: "block_preview",
+				name: block.name,
+				post_meta_key: block.name,
+			};
+			innerFields.push( fieldData );
+			return fieldData;
+		} );
+	fields = _.union( fields, blockFields );
 
 	if ( outerFields.length === 0 ) {
 		return fields;
@@ -399,7 +421,7 @@ var config = require( "./config/config.js" );
 
 var ReplaceVar = YoastReplaceVarPlugin.ReplaceVar;
 
-var supportedTypes = [ "email", "text", "textarea", "url", "wysiwyg" ];
+var supportedTypes = [ "email", "text", "textarea", "url", "wysiwyg", "block_preview" ];
 
 var replaceVars = {};
 
@@ -465,6 +487,8 @@ var scraperObjects = {
 	// TODO: Add oembed handler
 	image: require( "./scraper/scraper.image.js" ),
 	gallery: require( "./scraper/scraper.gallery.js" ),
+	// ACF blocks preview
+	block_preview: require( "./scraper/scraper.block_preview.js" ),
 
 	// Choice
 	// TODO: select, checkbox, radio
@@ -545,7 +569,28 @@ module.exports = {
 	getScraper: getScraper,
 };
 
-},{"./config/config.js":7,"./scraper/scraper.email.js":12,"./scraper/scraper.gallery.js":13,"./scraper/scraper.image.js":14,"./scraper/scraper.link.js":15,"./scraper/scraper.taxonomy.js":16,"./scraper/scraper.text.js":17,"./scraper/scraper.textarea.js":18,"./scraper/scraper.url.js":19,"./scraper/scraper.wysiwyg.js":20}],12:[function(require,module,exports){
+},{"./config/config.js":7,"./scraper/scraper.block_preview.js":12,"./scraper/scraper.email.js":13,"./scraper/scraper.gallery.js":14,"./scraper/scraper.image.js":15,"./scraper/scraper.link.js":16,"./scraper/scraper.taxonomy.js":17,"./scraper/scraper.text.js":18,"./scraper/scraper.textarea.js":19,"./scraper/scraper.url.js":20,"./scraper/scraper.wysiwyg.js":21}],12:[function(require,module,exports){
+/* global _ */
+
+var Scraper = function() {};
+
+Scraper.prototype.scrape = function( fields ) {
+	fields = _.map( fields, function( field ) {
+		if ( field.type !== "block_preview" ) {
+			return field;
+		}
+
+		field.content = field.$el.html();
+
+		return field;
+	} );
+
+	return fields;
+};
+
+module.exports = Scraper;
+
+},{}],13:[function(require,module,exports){
 /* global _ */
 
 var Scraper = function() {};
@@ -566,7 +611,7 @@ Scraper.prototype.scrape = function( fields ) {
 
 module.exports = Scraper;
 
-},{}],13:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 /* global _, jQuery */
 
 var attachmentCache = require( "./../cache/cache.attachments.js" );
@@ -608,7 +653,7 @@ Scraper.prototype.scrape = function( fields ) {
 
 module.exports = Scraper;
 
-},{"./../cache/cache.attachments.js":2}],14:[function(require,module,exports){
+},{"./../cache/cache.attachments.js":2}],15:[function(require,module,exports){
 /* global _ */
 
 var attachmentCache = require( "./../cache/cache.attachments.js" );
@@ -646,7 +691,7 @@ Scraper.prototype.scrape = function( fields ) {
 
 module.exports = Scraper;
 
-},{"./../cache/cache.attachments.js":2}],15:[function(require,module,exports){
+},{"./../cache/cache.attachments.js":2}],16:[function(require,module,exports){
 /* global _ */
 require( "./../scraper-store.js" );
 
@@ -681,7 +726,7 @@ Scraper.prototype.scrape = function( fields ) {
 
 module.exports = Scraper;
 
-},{"./../scraper-store.js":11}],16:[function(require,module,exports){
+},{"./../scraper-store.js":11}],17:[function(require,module,exports){
 /* global _, acf */
 
 var Scraper = function() {};
@@ -737,7 +782,7 @@ Scraper.prototype.scrape = function( fields ) {
 
 module.exports = Scraper;
 
-},{}],17:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 /* global _ */
 
 var config = require( "./../config/config.js" );
@@ -792,7 +837,7 @@ Scraper.prototype.isHeadline = function( field ) {
 
 module.exports = Scraper;
 
-},{"./../config/config.js":7}],18:[function(require,module,exports){
+},{"./../config/config.js":7}],19:[function(require,module,exports){
 /* global _ */
 
 var Scraper = function() {};
@@ -813,7 +858,7 @@ Scraper.prototype.scrape = function( fields ) {
 
 module.exports = Scraper;
 
-},{}],19:[function(require,module,exports){
+},{}],20:[function(require,module,exports){
 /* global _ */
 
 var Scraper = function() {};
@@ -836,7 +881,7 @@ Scraper.prototype.scrape = function( fields ) {
 
 module.exports = Scraper;
 
-},{}],20:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 /* global tinyMCE, _ */
 
 var Scraper = function() {};
