@@ -66,17 +66,15 @@ Enhancements:
 Other:
 
 * Fixes a couple of typos in the code documentation. Props to [akkspros](https://github.com/akkspros).
-
-Deprecations:
 * Deprecates `Yoast_ACF_Analysis_Facade::get_filter_name()`. Use hard-coded hook names instead.
-* This deprecates the  `yoast-acf-analysis/config` filter hook in favour of the `Yoast\WP\ACF\config` hook.
-* This deprecates the `yoast-acf-analysis/headlines` filter hook in favour of the `Yoast\WP\ACF\headlines` hook.
-* This deprecates the `yoast-acf-analysis/blacklist_type` filter hook in favour of the `Yoast\WP\ACF\blacklist_type` hook.
-* This deprecates the `yoast-acf-analysis/blacklist_name` filter hook in favour of the `Yoast\WP\ACF\blacklist_name` hook.
-* This deprecates the `yoast-acf-analysis/scraper_config` filter hook in favour of the `Yoast\WP\ACF\scraper_config` hook.
-* This deprecates the `yoast-acf-analysis/refresh_rate` filter hook in favour of the `Yoast\WP\ACF\refresh_rate` hook.
-* This deprecates the `yoast-acf-analysis/field_selectors` filter hook in favour of the `Yoast\WP\ACF\field_selectors` hook.
-* This deprecates the `yoast-acf-analysis/field_order` filter hook in favour of the `Yoast\WP\ACF\field_order` hook.
+* Deprecates the  yoast-acf-analysis/config` filter hook in favor of the `Yoast\WP\ACF\config` hook.
+* Deprecates the `yoast-acf-analysis/headlines` filter hook in favor of the `Yoast\WP\ACF\headlines` hook.
+* Deprecates the `yoast-acf-analysis/blacklist_type` filter hook in favor of the `Yoast\WP\ACF\blacklist_type` hook.
+* Deprecates the `yoast-acf-analysis/blacklist_name` filter hook in favor of the `Yoast\WP\ACF\blacklist_name` hook.
+* Deprecates the `yoast-acf-analysis/scraper_config` filter hook in favor of the `Yoast\WP\ACF\scraper_config` hook.
+* Deprecates the `yoast-acf-analysis/refresh_rate` filter hook in favor of the `Yoast\WP\ACF\refresh_rate` hook.
+* Deprecates the `yoast-acf-analysis/field_selectors` filter hook in favor of the `Yoast\WP\ACF\field_selectors` hook.
+* Deprecates the `yoast-acf-analysis/field_order` filter hook in favor of the `Yoast\WP\ACF\field_order` hook.
 
 = 2.3.0 =
 
