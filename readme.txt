@@ -55,6 +55,14 @@ Previously called Yoast ACF Analysis.
 
 == Changelog ==
 
+= 2.4.1 =
+
+Released: TBD
+
+Bugfixes:
+
+* Fixes a bug where Yoast ACF analysis would error when the Classic Editor is installed.
+
 = 2.4.0 =
 
 Released June 4th, 2020
