@@ -48,21 +48,6 @@ module.exports = function() {
 				return fieldData;
 			} );
 		fields = _.union( fields, blockFields );
-	} else {
-		// Gutenberg is not available. Use the old method.
-		var index = 0;
-		fields = _.union( fields, _.map( jQuery( ".acf-block-preview" ), function( field ) {
-			var fieldData = {
-				$el: jQuery( field ),
-				key: null,
-				type: "block_preview",
-				name: "block_preview_" + index,
-				post_meta_key: "block_preview_" + index,
-			};
-			innerFields.push( fieldData );
-			index++;
-			return fieldData;
-		} ) );
 	}
 
 	if ( outerFields.length === 0 ) {
