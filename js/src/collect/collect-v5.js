@@ -1,5 +1,4 @@
 /* global _, acf, jQuery, wp */
-
 module.exports = function() {
 	var outerFieldsName = [
 		"flexible_content",
@@ -29,23 +28,42 @@ module.exports = function() {
 	} );
 
 	// Add ACF block previews, they are not returned by acf.get_fields()
-	var blocks = wp.data.select( "core/block-editor" ).getBlocks();
-	var blockFields = _.map(
-		_.filter( blocks, function( block ) {
-			return block.name.startsWith( "acf/" ) && block.attributes.mode === "preview";
-		} ),
-		function( block ) {
+	// First check if we can use Gutenberg.
+	if ( wp.data.select( "core/block-editor" ) ) {
+		// Gutenberg is available.
+		var blocks = wp.data.select( "core/block-editor" ).getBlocks();
+		var blockFields = _.map(
+			_.filter( blocks, function( block ) {
+				return block.name.startsWith( "acf/" ) && block.attributes.mode === "preview";
+			} ),
+			function( block ) {
+				var fieldData = {
+					$el: jQuery( `[data-block="${block.clientId}"] .acf-block-preview` ),
+					key: block.attributes.id,
+					type: "block_preview",
+					name: block.name,
+					post_meta_key: block.name,
+				};
+				innerFields.push( fieldData );
+				return fieldData;
+			} );
+		fields = _.union( fields, blockFields );
+	} else {
+		// Gutenberg is not available. Use the old method.
+		var index = 0;
+		fields = _.union( fields, _.map( jQuery( ".acf-block-preview" ), function( field ) {
 			var fieldData = {
-				$el: jQuery( `[data-block="${block.clientId}"] .acf-block-preview` ),
-				key: block.attributes.id,
+				$el: jQuery( field ),
+				key: null,
 				type: "block_preview",
-				name: block.name,
-				post_meta_key: block.name,
+				name: "block_preview_" + index,
+				post_meta_key: "block_preview_" + index,
 			};
 			innerFields.push( fieldData );
+			index++;
 			return fieldData;
-		} );
-	fields = _.union( fields, blockFields );
+		} ) );
+	}
 
 	if ( outerFields.length === 0 ) {
 		return fields;
