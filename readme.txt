@@ -61,7 +61,8 @@ Released: TBD
 
 Bugfixes:
 
-* Fixes a bug where Yoast ACF analysis would error when the Classic Editor is installed.
+* Fixes a bug where an error would be thrown when using the Classic Editor plugin.
+* Fixes a bug where custom fields were no longer analysed when using the Classic Editor plugin.
 
 = 2.4.0 =
 
