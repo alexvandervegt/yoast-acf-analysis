@@ -8,11 +8,18 @@ module.exports = function() {
 
 	var innerFields = [];
 	var outerFields = [];
+	var acfFields = [];
 
-	// Return only fields in metabox areas (either below or side) or
-	// ACF block fields in the content (not in the sidebar, to prevent duplicates)
-	var parentContainer = jQuery( ".metabox-location-normal, .metabox-location-side, .acf-block-component.acf-block-body" );
-	var fields = _.map( acf.get_fields( false, parentContainer ), function( field ) {
+	if ( wp.data.select( "core/block-editor" ) ) {
+		// Return only fields in metabox areas (either below or side) or
+		// ACF block fields in the content (not in the sidebar, to prevent duplicates)
+		var parentContainer = jQuery( ".metabox-location-normal, .metabox-location-side, .acf-block-component.acf-block-body" );
+		acfFields = acf.get_fields( false, parentContainer );
+	} else {
+		acfFields = acf.get_fields();
+	}
+
+	var fields = _.map( acfFields, function( field ) {
 		var fieldData = jQuery.extend( true, {}, acf.get_data( jQuery( field ) ) );
 		fieldData.$el = jQuery( field );
 		fieldData.post_meta_key = fieldData.name;
