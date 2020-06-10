@@ -5,7 +5,7 @@ Requires at least: 5.2
 Tested up to: 5.4.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl.html
-Stable tag: 2.4.0
+Stable tag: 2.4.1
 Requires PHP: 5.6.20
 
 WordPress plugin that adds the content of all ACF fields to the Yoast SEO score analysis.
@@ -57,12 +57,12 @@ Previously called Yoast ACF Analysis.
 
 = 2.4.1 =
 
-Released: TBD
+Released June 10th, 2020
 
 Bugfixes:
 
 * Fixes a bug where an error would be thrown when using the Classic Editor plugin.
-* Fixes a bug where custom fields were no longer analysed when using the Classic Editor plugin.
+* Fixes a bug where custom fields were no longer analyzed when using the Classic Editor plugin.
 
 = 2.4.0 =
 
