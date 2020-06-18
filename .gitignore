@@ -9,4 +9,5 @@ nightwatch.conf.js
 
 phpcs.xml
 .phpcs.xml
+.cache/phpcs.cache
 phpunit.xml
