@@ -38,11 +38,11 @@ class Yoast_ACF_Analysis_Assets {
 		$config = Yoast_ACF_Analysis_Facade::get_registry()->get( 'config' );
 
 		// Post page enqueue.
-		if ( wp_script_is( WPSEO_Admin_Asset_Manager::PREFIX . 'post-scraper' ) ) {
+		if ( wp_script_is( WPSEO_Admin_Asset_Manager::PREFIX . 'post-edit' ) ) {
 			wp_enqueue_script(
 				'yoast-acf-analysis-post',
 				plugins_url( '/js/yoast-acf-analysis.js', AC_SEO_ACF_ANALYSIS_PLUGIN_FILE ),
-				[ 'jquery', WPSEO_Admin_Asset_Manager::PREFIX . 'post-scraper', 'underscore' ],
+				[ 'jquery', WPSEO_Admin_Asset_Manager::PREFIX . 'post-edit', 'underscore' ],
 				$this->plugin_data['Version'],
 				true
 			);
@@ -51,11 +51,11 @@ class Yoast_ACF_Analysis_Assets {
 		}
 
 		// Term page enqueue.
-		if ( wp_script_is( WPSEO_Admin_Asset_Manager::PREFIX . 'term-scraper' ) ) {
+		if ( wp_script_is( WPSEO_Admin_Asset_Manager::PREFIX . 'term-edit' ) ) {
 			wp_enqueue_script(
 				'yoast-acf-analysis-term',
 				plugins_url( '/js/yoast-acf-analysis.js', AC_SEO_ACF_ANALYSIS_PLUGIN_FILE ),
-				[ 'jquery', WPSEO_Admin_Asset_Manager::PREFIX . 'term-scraper' ],
+				[ 'jquery', WPSEO_Admin_Asset_Manager::PREFIX . 'term-edit' ],
 				$this->plugin_data['Version'],
 				true
 			);
