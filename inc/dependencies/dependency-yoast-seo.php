@@ -10,7 +10,7 @@
  */
 final class Yoast_ACF_Analysis_Dependency_Yoast_SEO implements Yoast_ACF_Analysis_Dependency {
 
-	const MINIMAL_REQUIRED_VERSION = 14.5;
+	const MINIMAL_REQUIRED_VERSION = 14.6;
 
 	/**
 	 * Checks if this dependency is met.
