@@ -40,14 +40,18 @@ before_install:
 - if [[ "$CHECKJS" == "1" ]]; then export PATH=$HOME/.yarn/bin:$PATH; fi
 
 install:
-- if [[ "$PHPUNIT" == "1" ]]; then composer install --no-interaction; fi
+- |
+  if [[ $TRAVIS_PHP_VERSION == "nightly" ]]; then
+    composer install --prefer-dist --no-interaction --ignore-platform-reqs
+  else
+    composer install --prefer-dist --no-interaction
+  fi
 - if [[ "$CHECKJS" == "1" ]]; then yarn global add grunt-cli; fi
 - if [[ "$CHECKJS" == "1" ]]; then yarn install; fi
 - if [[ "$SECURITY" == "1" ]]; then wget -P $SECURITYCHECK_DIR https://get.sensiolabs.org/security-checker.phar && chmod +x $SECURITYCHECK_DIR/security-checker.phar;fi
 
 script:
-- if find -L . -path ./vendor -prune -o -path ./node_modules -prune -o -name '*.php' -exec php -l {} \; | grep "^[Parse error|Fatal error]"; then exit 1; fi
-# Run PHPCS separately for the plugin files and the test files.
+- composer lint
 - if [[ "$PHPCS" == "1" ]]; then composer check-cs; fi
 - if [[ "$CHECKJS" == "1" ]]; then grunt check; fi
 - if [[ "$PHPUNIT" == "1" ]]; then composer test; fi
