@@ -57,6 +57,8 @@ Previously called Yoast ACF Analysis.
 
 = 2.5.0 =
 
+Released July 21st, 2020
+
 Other:
 
 * Makes the plugin compatible with JavaScript changes introduced in Yoast SEO 14.6. We used to depend on JavaScript files which aren't there anymore. We now depend on `post-edit.js` or `term-edit.js`.
