@@ -1,5 +1,6 @@
+os: linux
+dist: xenial
 language: php
-dist: trusty
 
 cache:
   yarn: true
@@ -18,7 +19,7 @@ branches:
     - /^release\/\d+\.\d+(\.\d+)?(-\S*)?$/
     - /^hotfix\/\d+\.\d+(\.\d+)?(-\S*)?$/
 
-matrix:
+jobs:
   fast_finish: true
   include:
     - php: 7.4
