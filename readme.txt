@@ -57,6 +57,8 @@ Previously called Yoast ACF Analysis.
 
 = 2.6.0 =
 
+Released August 4th, 2020
+
 Bugfixes:
 
 * Fixes a bug where the content of ACF blocks in 'auto' mode was not taken into account when the block (automatically) switched to preview mode. Props to [TimVevida](https://github.com/TimVevida).
