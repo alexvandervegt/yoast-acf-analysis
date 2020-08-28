@@ -55,6 +55,15 @@ Previously called Yoast ACF Analysis.
 
 == Changelog ==
 
+= 2.7.0 =
+
+Released September 1st, 2020
+
+Other:
+
+* Compatibility with Yoast SEO 14.9.
+
+
 = 2.6.0 =
 
 Released August 4th, 2020
