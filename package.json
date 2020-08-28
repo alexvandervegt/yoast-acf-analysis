@@ -1,6 +1,6 @@
 {
   "name": "yoast-acf-analysis",
-  "version": "2.6.0",
+  "version": "2.7.0-RC1",
   "description": "WordPress plugin that adds the content of all ACF fields to the Yoast SEO score analysis.",
   "keywords": [
     "yoast",
