@@ -5,7 +5,7 @@ Requires at least: 5.2
 Tested up to: 5.4
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl.html
-Stable tag: 2.6
+Stable tag: 2.7
 Requires PHP: 5.6.20
 
 WordPress plugin that adds the content of all ACF fields to the Yoast SEO score analysis.
