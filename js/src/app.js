@@ -52,9 +52,31 @@ App.prototype.acf4Listener = function( fieldSelectors, wysiwygSelector, fieldSel
 App.prototype.acf5Listener = function() {
 	replaceVars.updateReplaceVars( collect );
 
-	acf.add_action( "change remove append sortstop", this.maybeRefresh );
-	acf.add_action( "change remove append sortstop", replaceVars.updateReplaceVars.bind( this, collect ) );
+	var self = this;
+
+	// Use ACF Models introduced in ACF version 5.7.
+	var acfModelInstance = new acf.Model( {
+		wait: 'ready',
+		events: {
+			'input': 'onInput',
+		},
+		onInput: function() {
+			self.refreshAnalysisAndReplaceVars();
+		},
+	} );
+
+	// The ACF Wysiwyg field needs some special treatment.
+	jQuery( document ).on( 'tinymce-editor-init', function( event, editor ) {
+		editor.on( 'input paste undo redo', function() {
+			self.refreshAnalysisAndReplaceVars();
+		} );
+	} );
 };
+
+App.prototype.refreshAnalysisAndReplaceVars = function() {
+	this.maybeRefresh();
+	replaceVars.updateReplaceVars.bind( this, collect );
+}
 
 App.prototype.bindListeners = function() {
 	if ( helper.acf_version >= 5 ) {
