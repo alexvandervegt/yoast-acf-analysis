@@ -61,17 +61,38 @@ App.prototype.acf5Listener = function() {
 		events: {
 			'input': 'onInput',
 		},
-		onInput: function() {
-			self.refreshAnalysisAndReplaceVars();
-		},
+		onInput: this.refreshAnalysisAndReplaceVars.bind( this ),
 	} );
 
-	// The ACF Wysiwyg field needs some special treatment.
+	// The ACF Wysiwyg field needs to be handled after TinyMCE is initialized.
 	jQuery( document ).on( 'tinymce-editor-init', function( event, editor ) {
+		/*
+		 * TinyMCE supports the native `input` event but doesn't always fire it
+		 * when pasting: added a specific `paste` event. Also, added TinyMCE specific
+		 * events to support the undo and redo actions.
+		 */
 		editor.on( 'input paste undo redo', function() {
 			self.refreshAnalysisAndReplaceVars();
 		} );
 	} );
+
+	/*
+	 * ACF `append` global action: Triggered when new HTML is added to the page.
+	 * For example, when adding a Repeater row or a Flexible content layout.
+	 */
+	acf.addAction( 'append', this.refreshAnalysisAndReplaceVars.bind( this ) );
+
+	/*
+	 * ACF `remove` global action: Triggered when HTML is removed from the page.
+	 * For example, when removing a Repeater row or a Flexible content layout.
+	 */
+	acf.addAction( 'remove', this.refreshAnalysisAndReplaceVars.bind( this ) );
+
+	/*
+	 * ACF `sortstop` global action: Triggered when a field is reordered.
+	 * For example, when reordering Repeater rows or Flexible content layouts.
+	 */
+	acf.addAction( 'sortstop', this.refreshAnalysisAndReplaceVars.bind( this ) );
 };
 
 App.prototype.refreshAnalysisAndReplaceVars = function() {
