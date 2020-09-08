@@ -52,26 +52,28 @@ App.prototype.acf4Listener = function( fieldSelectors, wysiwygSelector, fieldSel
 App.prototype.acf5Listener = function() {
 	replaceVars.updateReplaceVars( collect );
 
-	var self = this;
+	var that = this;
 
 	// Use ACF Models introduced in ACF version 5.7.
+	/* eslint-disable no-unused-vars */
 	var acfModelInstance = new acf.Model( {
-		wait: 'ready',
+		wait: "ready",
 		events: {
-			'input': 'onInput',
+			input: "onInput",
 		},
 		onInput: this.refreshAnalysisAndReplaceVars.bind( this ),
 	} );
+	/* eslint-enable no-unused-vars */
 
 	// The ACF Wysiwyg field needs to be handled after TinyMCE is initialized.
-	jQuery( document ).on( 'tinymce-editor-init', function( event, editor ) {
+	jQuery( document ).on( "tinymce-editor-init", function( event, editor ) {
 		/*
 		 * TinyMCE supports the native `input` event but doesn't always fire it
 		 * when pasting: added a specific `paste` event. Also, added TinyMCE specific
 		 * events to support the undo and redo actions.
 		 */
-		editor.on( 'input paste undo redo', function() {
-			self.refreshAnalysisAndReplaceVars();
+		editor.on( "input paste undo redo", function() {
+			that.refreshAnalysisAndReplaceVars();
 		} );
 	} );
 
@@ -79,25 +81,25 @@ App.prototype.acf5Listener = function() {
 	 * ACF `append` global action: Triggered when new HTML is added to the page.
 	 * For example, when adding a Repeater row or a Flexible content layout.
 	 */
-	acf.addAction( 'append', this.refreshAnalysisAndReplaceVars.bind( this ) );
+	acf.addAction( "append", this.refreshAnalysisAndReplaceVars.bind( this ) );
 
 	/*
 	 * ACF `remove` global action: Triggered when HTML is removed from the page.
 	 * For example, when removing a Repeater row or a Flexible content layout.
 	 */
-	acf.addAction( 'remove', this.refreshAnalysisAndReplaceVars.bind( this ) );
+	acf.addAction( "remove", this.refreshAnalysisAndReplaceVars.bind( this ) );
 
 	/*
 	 * ACF `sortstop` global action: Triggered when a field is reordered.
 	 * For example, when reordering Repeater rows or Flexible content layouts.
 	 */
-	acf.addAction( 'sortstop', this.refreshAnalysisAndReplaceVars.bind( this ) );
+	acf.addAction( "sortstop", this.refreshAnalysisAndReplaceVars.bind( this ) );
 };
 
 App.prototype.refreshAnalysisAndReplaceVars = function() {
 	this.maybeRefresh();
 	replaceVars.updateReplaceVars.bind( this, collect );
-}
+};
 
 App.prototype.bindListeners = function() {
 	if ( helper.acf_version >= 5 ) {
@@ -120,7 +122,9 @@ App.prototype.maybeRefresh = function() {
 
 	analysisTimeout = window.setTimeout( function() {
 		if ( config.debug ) {
+			/* eslint-disable no-console */
 			console.log( "Recalculate..." + new Date() + "(Internal)" );
+			/* eslint-enable no-console */
 		}
 
 		YoastSEO.app.pluginReloaded( config.pluginName );
