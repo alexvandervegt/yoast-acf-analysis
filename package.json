@@ -27,7 +27,6 @@
     "build": "browserify js/src/main.js -o js/yoast-acf-analysis.js",
     "watch": "watchify js/src/main.js -o js/yoast-acf-analysis.js --poll --verbose --debug",
     "test": "(cd tests/js/system/ && exec ../../../node_modules/.bin/nightwatch)",
-    "test-acf4": "(cd tests/js/system/ && exec ../../../node_modules/.bin/nightwatch  --group general --group acf4)",
     "test-acf5": "(cd tests/js/system/ && exec ../../../node_modules/.bin/nightwatch   --group general --group acf5 --skiptags pro)",
     "test-acf5pro": "(cd tests/js/system/ && exec ../../../node_modules/.bin/nightwatch   --group general --group acf5)"
   },

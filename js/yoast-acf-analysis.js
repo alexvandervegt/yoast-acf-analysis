@@ -16,36 +16,6 @@ var App = function() {
 };
 
 /**
- * ACF 4 Listener.
- *
- * @param {Array} fieldSelectors List of field selectors.
- * @param {string} wysiwygSelector Element selector for WYSIWYG fields.
- * @param {Array} fieldSelectorsWithoutWysiwyg List of fields.
- *
- * @returns {void}
- */
-App.prototype.acf4Listener = function( fieldSelectors, wysiwygSelector, fieldSelectorsWithoutWysiwyg ) {
-	replaceVars.updateReplaceVars( collect );
-
-	var fieldsWithoutWysiwyg = jQuery( "#post-body, #edittag" ).find( fieldSelectorsWithoutWysiwyg.join( "," ) );
-	var fields = jQuery( "#post-body, #edittag" ).find( fieldSelectors.join( "," ) );
-
-	fieldsWithoutWysiwyg.on( "change", this.maybeRefresh.bind( this ) );
-	// Do not ignore Wysiwyg fields for the purpose of Replace Vars.
-	fields.on( "change", replaceVars.updateReplaceVars.bind( this, collect ) );
-
-	if ( YoastSEO.wp._tinyMCEHelper ) {
-		jQuery( wysiwygSelector ).each( function() {
-			YoastSEO.wp._tinyMCEHelper.addEventHandler( this.id, [ "input", "change", "cut", "paste" ],
-				replaceVars.updateReplaceVars.bind( this, collect ) );
-		} );
-	}
-
-	// Also refresh on media close as attachment data might have changed
-	wp.media.frame.on( "close", this.maybeRefresh );
-};
-
-/**
  * ACF 5 Listener.
  *
  * @returns {void}
@@ -105,14 +75,6 @@ App.prototype.refreshAnalysisAndReplaceVars = function() {
 App.prototype.bindListeners = function() {
 	if ( helper.acf_version >= 5 ) {
 		jQuery( this.acf5Listener.bind( this ) );
-	} else {
-		var fieldSelectors = config.fieldSelectors.slice( 0 );
-		var wysiwygSelector = "textarea[id^=wysiwyg-acf]";
-
-		// Ignore Wysiwyg fields because they trigger a refresh in Yoast SEO itself
-		var fieldSelectorsWithoutWysiwyg = _.without( fieldSelectors, wysiwygSelector );
-
-		jQuery( document ).on( "acf/setup_fields", this.acf4Listener.bind( this, fieldSelectors, wysiwygSelector, fieldSelectorsWithoutWysiwyg ) );
 	}
 };
 
@@ -134,7 +96,7 @@ App.prototype.maybeRefresh = function() {
 
 module.exports = App;
 
-},{"./collect/collect.js":6,"./config/config.js":7,"./helper.js":8,"./replacevars.js":10}],2:[function(require,module,exports){
+},{"./collect/collect.js":5,"./config/config.js":6,"./helper.js":7,"./replacevars.js":9}],2:[function(require,module,exports){
 /* global _ */
 var cache = require( "./cache.js" );
 
@@ -237,30 +199,6 @@ Cache.prototype.clear =  function( store ) {
 module.exports = new Cache();
 
 },{}],4:[function(require,module,exports){
-/* global jQuery */
-
-var config = require( "./../config/config.js" );
-var fieldSelectors = config.fieldSelectors;
-
-var field_data = [];
-
-var fields = jQuery( "#post-body, #edittag" ).find( fieldSelectors.join( "," ) );
-
-fields.each( function() {
-	var $el = jQuery( this ).parents( ".field" ).last();
-
-	field_data.push( {
-		$el: $el,
-		key: $el.data( "field_key" ),
-		name: $el.data( "field_name" ),
-		type: $el.data( "field_type" ),
-		post_meta_key: $el.data( "field_name" ),
-	} );
-} );
-
-module.exports = field_data;
-
-},{"./../config/config.js":7}],5:[function(require,module,exports){
 /* global _, acf, jQuery, wp */
 module.exports = function() {
 	var outerFieldsName = [
@@ -349,7 +287,7 @@ module.exports = function() {
 	return fields;
 };
 
-},{}],6:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 /* global _ */
 
 var config = require( "./../config/config.js" );
@@ -409,7 +347,6 @@ Collect.prototype.getData = function() {
 	if ( helper.acf_version >= 5 ) {
 		return require( "./collect-v5.js" )();
 	}
-	return require( "./collect-v4.js" );
 };
 
 Collect.prototype.filterBlacklistType = function( field_data ) {
@@ -446,18 +383,18 @@ Collect.prototype.sort = function( field_data ) {
 
 module.exports = new Collect();
 
-},{"./../config/config.js":7,"./../helper.js":8,"./../scraper-store.js":11,"./collect-v4.js":4,"./collect-v5.js":5}],7:[function(require,module,exports){
+},{"./../config/config.js":6,"./../helper.js":7,"./../scraper-store.js":10,"./collect-v5.js":4}],6:[function(require,module,exports){
 /* globals YoastACFAnalysisConfig */
 module.exports = YoastACFAnalysisConfig;
 
-},{}],8:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 var config = require( "./config/config.js" );
 
 module.exports = {
 	acf_version: parseFloat( config.acfVersion, 10 ),
 };
 
-},{"./config/config.js":7}],9:[function(require,module,exports){
+},{"./config/config.js":6}],8:[function(require,module,exports){
 /* global jQuery, YoastSEO, wp, YoastACFAnalysis: true */
 /* exported YoastACFAnalysis */
 
@@ -469,7 +406,7 @@ wp.domReady( function() {
 	}
 } );
 
-},{"./app.js":1}],10:[function(require,module,exports){
+},{"./app.js":1}],9:[function(require,module,exports){
 /* global _, jQuery, YoastSEO, YoastReplaceVarPlugin */
 
 var config = require( "./config/config.js" );
@@ -526,7 +463,7 @@ module.exports = {
 	updateReplaceVars: updateReplaceVars,
 };
 
-},{"./config/config.js":7}],11:[function(require,module,exports){
+},{"./config/config.js":6}],10:[function(require,module,exports){
 var config = require( "./config/config.js" );
 
 var scraperObjects = {
@@ -624,7 +561,7 @@ module.exports = {
 	getScraper: getScraper,
 };
 
-},{"./config/config.js":7,"./scraper/scraper.block_preview.js":12,"./scraper/scraper.email.js":13,"./scraper/scraper.gallery.js":14,"./scraper/scraper.image.js":15,"./scraper/scraper.link.js":16,"./scraper/scraper.taxonomy.js":17,"./scraper/scraper.text.js":18,"./scraper/scraper.textarea.js":19,"./scraper/scraper.url.js":20,"./scraper/scraper.wysiwyg.js":21}],12:[function(require,module,exports){
+},{"./config/config.js":6,"./scraper/scraper.block_preview.js":11,"./scraper/scraper.email.js":12,"./scraper/scraper.gallery.js":13,"./scraper/scraper.image.js":14,"./scraper/scraper.link.js":15,"./scraper/scraper.taxonomy.js":16,"./scraper/scraper.text.js":17,"./scraper/scraper.textarea.js":18,"./scraper/scraper.url.js":19,"./scraper/scraper.wysiwyg.js":20}],11:[function(require,module,exports){
 /* global _ */
 
 var Scraper = function() {};
@@ -645,7 +582,7 @@ Scraper.prototype.scrape = function( fields ) {
 
 module.exports = Scraper;
 
-},{}],13:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 /* global _ */
 
 var Scraper = function() {};
@@ -666,7 +603,7 @@ Scraper.prototype.scrape = function( fields ) {
 
 module.exports = Scraper;
 
-},{}],14:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 /* global _, jQuery */
 
 var attachmentCache = require( "./../cache/cache.attachments.js" );
@@ -708,7 +645,7 @@ Scraper.prototype.scrape = function( fields ) {
 
 module.exports = Scraper;
 
-},{"./../cache/cache.attachments.js":2}],15:[function(require,module,exports){
+},{"./../cache/cache.attachments.js":2}],14:[function(require,module,exports){
 /* global _ */
 
 var attachmentCache = require( "./../cache/cache.attachments.js" );
@@ -746,7 +683,7 @@ Scraper.prototype.scrape = function( fields ) {
 
 module.exports = Scraper;
 
-},{"./../cache/cache.attachments.js":2}],16:[function(require,module,exports){
+},{"./../cache/cache.attachments.js":2}],15:[function(require,module,exports){
 /* global _ */
 require( "./../scraper-store.js" );
 
@@ -781,7 +718,7 @@ Scraper.prototype.scrape = function( fields ) {
 
 module.exports = Scraper;
 
-},{"./../scraper-store.js":11}],17:[function(require,module,exports){
+},{"./../scraper-store.js":10}],16:[function(require,module,exports){
 /* global _, acf */
 
 var Scraper = function() {};
@@ -837,7 +774,7 @@ Scraper.prototype.scrape = function( fields ) {
 
 module.exports = Scraper;
 
-},{}],18:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 /* global _ */
 
 var config = require( "./../config/config.js" );
@@ -892,7 +829,7 @@ Scraper.prototype.isHeadline = function( field ) {
 
 module.exports = Scraper;
 
-},{"./../config/config.js":7}],19:[function(require,module,exports){
+},{"./../config/config.js":6}],18:[function(require,module,exports){
 /* global _ */
 
 var Scraper = function() {};
@@ -913,7 +850,7 @@ Scraper.prototype.scrape = function( fields ) {
 
 module.exports = Scraper;
 
-},{}],20:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 /* global _ */
 
 var Scraper = function() {};
@@ -936,7 +873,7 @@ Scraper.prototype.scrape = function( fields ) {
 
 module.exports = Scraper;
 
-},{}],21:[function(require,module,exports){
+},{}],20:[function(require,module,exports){
 /* global tinyMCE, _ */
 
 var Scraper = function() {};
@@ -995,4 +932,4 @@ Scraper.prototype.scrape = function( fields ) {
 
 module.exports = Scraper;
 
-},{}]},{},[9]);
+},{}]},{},[8]);
