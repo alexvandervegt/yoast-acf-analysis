@@ -1,4 +1,4 @@
-/* global YoastSEO, acf, _, jQuery, wp */
+/* global YoastSEO, acf, jQuery, */
 var config = require( "./config/config.js" );
 var helper = require( "./helper.js" );
 var collect = require( "./collect/collect.js" );
