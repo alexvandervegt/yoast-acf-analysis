@@ -62,7 +62,7 @@ Released September 21st, 2020
 Bugfixes:
 
 * Fixes a bug where the content of ACF fields wouldn't be included in the SEO and readability analysis when using the Classic Editor plugin.
-* Fixes a bug where changes to the content of ACF fields wouldn't trigger a live refresh of the Yoast SEO analysis.
+* Fixes a bug where changes to the content of ACF fields wouldn't trigger a live refresh of the SEO and readability analysis.
 
 Other:
 
