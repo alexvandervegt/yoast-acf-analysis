@@ -57,7 +57,7 @@ Previously called Yoast ACF Analysis.
 
 = 3.0.0 =
 
-Released September 21st, 2020
+Released September 29th, 2020
 
 Bugfixes:
 
