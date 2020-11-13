@@ -30,7 +30,7 @@ class String_Store_Test extends TestCase {
 		$store  = $this->getStore();
 		$result = $store->to_array();
 
-		$this->assertInternalType( 'array', $result );
+		$this->assertIsArray( $result );
 		$this->assertEmpty( $result );
 	}
 
@@ -112,7 +112,7 @@ class String_Store_Test extends TestCase {
 
 		$result = $store->to_array();
 
-		$this->assertInternalType( 'array', $result );
+		$this->assertIsArray( $result );
 		$this->assertEmpty( $result );
 	}
 
@@ -141,7 +141,7 @@ class String_Store_Test extends TestCase {
 
 		$result = $store->to_array();
 
-		$this->assertInternalType( 'array', $result );
+		$this->assertIsArray( $result );
 		$this->assertEmpty( $result );
 	}
 
