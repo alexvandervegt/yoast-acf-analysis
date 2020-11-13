@@ -2,8 +2,7 @@
 
 namespace Yoast\WP\ACF\Tests\Dependencies;
 
-use Brain\Monkey;
-use PHPUnit\Framework\TestCase;
+use Yoast\WPTestUtils\BrainMonkey\TestCase;
 use Yoast_ACF_Analysis_Dependency_Yoast_SEO;
 
 /**
@@ -26,26 +25,6 @@ class Yoast_SEO_Dependency_Test extends TestCase {
 	 * @var bool
 	 */
 	protected $runTestInSeparateProcess = true;
-
-	/**
-	 * Sets up test fixtures.
-	 *
-	 * @return void
-	 */
-	protected function setUp() {
-		parent::setUp();
-		Monkey\setUp();
-	}
-
-	/**
-	 * Tears down test fixtures previously setup.
-	 *
-	 * @return void
-	 */
-	protected function tearDown() {
-		Monkey\tearDown();
-		parent::tearDown();
-	}
 
 	/**
 	 * Tests that requirements are not met when Yoast SEO can't be found.

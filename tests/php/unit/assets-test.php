@@ -2,9 +2,8 @@
 
 namespace Yoast\WP\ACF\Tests;
 
-use Brain\Monkey;
 use Brain\Monkey\Functions;
-use PHPUnit\Framework\TestCase;
+use Yoast\WPTestUtils\BrainMonkey\TestCase;
 use Yoast_ACF_Analysis_Assets;
 
 /**
@@ -27,26 +26,6 @@ class Assets_Test extends TestCase {
 	 * @var bool
 	 */
 	protected $runTestInSeparateProcess = true;
-
-	/**
-	 * Sets up test fixtures.
-	 *
-	 * @return void
-	 */
-	protected function setUp() {
-		parent::setUp();
-		Monkey\setUp();
-	}
-
-	/**
-	 * Tears down test fixtures previously setup.
-	 *
-	 * @return void
-	 */
-	protected function tearDown() {
-		Monkey\tearDown();
-		parent::tearDown();
-	}
 
 	/**
 	 * Test the init hook and determines whether the proper assets are loaded.
