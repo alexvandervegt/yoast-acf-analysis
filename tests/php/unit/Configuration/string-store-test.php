@@ -2,7 +2,7 @@
 
 namespace Yoast\WP\ACF\Tests\Configuration;
 
-use PHPUnit\Framework\TestCase;
+use Yoast\PHPUnitPolyfills\TestCases\TestCase;
 use Yoast_ACF_Analysis_String_Store;
 
 /**
