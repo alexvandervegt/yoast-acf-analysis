@@ -3,21 +3,22 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/7.5/phpunit.xsd"
 		backupGlobals="false"
-		beStrictAboutCoversAnnotation="true"
 		beStrictAboutOutputDuringTests="true"
 		beStrictAboutTestsThatDoNotTestAnything="true"
 		beStrictAboutTodoAnnotatedTests="true"
 		bootstrap="vendor/autoload.php"
+		forceCoversAnnotation="true"
 		verbose="true"
 	>
 	<testsuites>
-		<testsuite name="unit">
+		<testsuite name="yoastacf">
 			<directory suffix="test.php">tests/php/unit</directory>
 		</testsuite>
 	</testsuites>
 
 	<filter>
-		<whitelist>
+		<whitelist addUncoveredFilesFromWhitelist="true" processUncoveredFilesFromWhitelist="false">
+			<file>yoast-acf-analysis.php</file>
 			<directory suffix=".php">inc/</directory>
 		</whitelist>
 	</filter>
