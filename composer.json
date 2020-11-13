@@ -48,11 +48,10 @@
     "composer/installers": "^1.9.0"
   },
   "require-dev": {
-    "brain/monkey": "^2.5.0",
-    "phpunit/phpunit": "^5.4 || ^6.0 || ^7.0",
     "yoast/yoastcs": "^2.1.0",
     "php-parallel-lint/php-parallel-lint": "^1.2",
-    "php-parallel-lint/php-console-highlighter": "^0.5"
+    "php-parallel-lint/php-console-highlighter": "^0.5",
+    "yoast/wp-test-utils": "^0.1.0"
   },
   "autoload": {
     "classmap": [ "inc" ]
