@@ -2,8 +2,7 @@
 
 namespace Yoast\WP\ACF\Tests\Dependencies;
 
-use Brain\Monkey;
-use PHPUnit\Framework\TestCase;
+use Yoast\WPTestUtils\BrainMonkey\TestCase;
 use Yoast_ACF_Analysis_Dependency_ACF;
 
 /**
@@ -12,26 +11,6 @@ use Yoast_ACF_Analysis_Dependency_ACF;
  * @covers Yoast_ACF_Analysis_Dependency_ACF
  */
 class ACF_Dependency_Test extends TestCase {
-
-	/**
-	 * Sets up test fixtures.
-	 *
-	 * @return void
-	 */
-	protected function setUp() {
-		parent::setUp();
-		Monkey\setUp();
-	}
-
-	/**
-	 * Tears down test fixtures previously setup.
-	 *
-	 * @return void
-	 */
-	protected function tearDown() {
-		Monkey\tearDown();
-		parent::tearDown();
-	}
 
 	/**
 	 * Tests the situation where no ACF class exists.

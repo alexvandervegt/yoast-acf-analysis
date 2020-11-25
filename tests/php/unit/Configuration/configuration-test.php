@@ -2,10 +2,9 @@
 
 namespace Yoast\WP\ACF\Tests\Configuration;
 
-use Brain\Monkey;
 use Brain\Monkey\Filters;
 use Brain\Monkey\Functions;
-use PHPUnit\Framework\TestCase;
+use Yoast\WPTestUtils\BrainMonkey\TestCase;
 use Yoast_ACF_Analysis_Configuration;
 use Yoast_ACF_Analysis_Facade;
 use Yoast_ACF_Analysis_String_Store;
@@ -16,26 +15,6 @@ use Yoast_ACF_Analysis_String_Store;
  * @covers Yoast_ACF_Analysis_Configuration
  */
 class Configuration_Test extends TestCase {
-
-	/**
-	 * Sets up test fixtures.
-	 *
-	 * @return void
-	 */
-	protected function setUp() {
-		parent::setUp();
-		Monkey\setUp();
-	}
-
-	/**
-	 * Tears down test fixtures previously setup.
-	 *
-	 * @return void
-	 */
-	protected function tearDown() {
-		Monkey\tearDown();
-		parent::tearDown();
-	}
 
 	/**
 	 * Tests empty configurations.
