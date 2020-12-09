@@ -28,8 +28,9 @@ jobs:
       env: PHPUNIT=1
     - php: 7.0
       env: PHPUNIT=1
-    - php: "nightly"
+    - php: 8.0
       env: PHPUNIT=1
+    - php: "nightly"
 
   allow_failures:
     # Allow failures for unstable builds.
@@ -43,7 +44,7 @@ before_install:
 
 install:
 - |
-  if [[ $TRAVIS_PHP_VERSION == "nightly" ]]; then
+  if [[ ${TRAVIS_PHP_VERSION:0:1} == "8" || $TRAVIS_PHP_VERSION == "nightly" ]]; then
     travis_retry composer update yoast/wp-test-utils --with-dependencies --no-interaction --ignore-platform-reqs
   else
     travis_retry composer install --no-interaction
