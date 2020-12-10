@@ -4,7 +4,9 @@
 var App = require( "./app.js" );
 
 wp.domReady( function() {
-	if ( "undefined" !== typeof YoastSEO ) {
-		YoastACFAnalysis = new App();
-	}
+	jQuery( document ).ready( function() {
+		if ( "undefined" !== typeof YoastSEO ) {
+			YoastACFAnalysis = new App();
+		}
+	} );
 } );
