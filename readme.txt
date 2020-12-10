@@ -55,6 +55,14 @@ Previously called Yoast ACF Analysis.
 
 == Changelog ==
 
+= 3.0.1 =
+
+Released December 10th, 2020
+
+Bugfixes:
+
+* Fixes a bug where ACF Analysis would fail on term pages when using WordPress 5.6.
+
 = 3.0.0 =
 
 Released September 29th, 2020
